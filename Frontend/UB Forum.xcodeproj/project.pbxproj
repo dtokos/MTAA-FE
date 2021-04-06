@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */; };
-		98067242261C7A8B00EA07C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98067241261C7A8B00EA07C4 /* ContentView.swift */; };
+		98067242261C7A8B00EA07C4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98067241261C7A8B00EA07C4 /* MainView.swift */; };
 		98067244261C7A8D00EA07C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98067243261C7A8D00EA07C4 /* Assets.xcassets */; };
 		98067247261C7A8D00EA07C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98067246261C7A8D00EA07C4 /* Preview Assets.xcassets */; };
+		988E3889261CE03D0015D61B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E3888261CE03D0015D61B /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9806723C261C7A8A00EA07C4 /* UB Forum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UB Forum.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UB_ForumApp.swift; sourceTree = "<group>"; };
-		98067241261C7A8B00EA07C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		98067241261C7A8B00EA07C4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		98067243261C7A8D00EA07C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98067246261C7A8D00EA07C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		98067248261C7A8D00EA07C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		988E3888261CE03D0015D61B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */,
-				98067241261C7A8B00EA07C4 /* ContentView.swift */,
+				98067241261C7A8B00EA07C4 /* MainView.swift */,
+				988E3888261CE03D0015D61B /* LoginView.swift */,
 				98067243261C7A8D00EA07C4 /* Assets.xcassets */,
 				98067248261C7A8D00EA07C4 /* Info.plist */,
 				98067245261C7A8D00EA07C4 /* Preview Content */,
@@ -138,7 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98067242261C7A8B00EA07C4 /* ContentView.swift in Sources */,
+				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
+				98067242261C7A8B00EA07C4 /* MainView.swift in Sources */,
 				98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,7 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dtokos.UB-Forum";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -302,7 +306,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dtokos.UB-Forum";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
