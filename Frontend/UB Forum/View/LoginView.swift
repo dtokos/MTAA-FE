@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Binding var isLoggedIn: Bool
     @State private var email = ""
     @State private var password = ""
     
@@ -15,19 +16,24 @@ struct LoginView: View {
             TextField("Heslo", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
-            Button("Prihlásiť") {
-                
-            }.frame(maxWidth: .infinity)
-            .padding(.vertical, 10)
-            .foregroundColor(.white)
-            .background(Color.blue)
-            .cornerRadius(8)
+            Button(action: logIn) {
+                Text("Prihlásiť")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(8)
+            }
         }.padding(.horizontal)
+    }
+    
+    func logIn() {
+        self.isLoggedIn = true
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(isLoggedIn: .constant(false))
     }
 }

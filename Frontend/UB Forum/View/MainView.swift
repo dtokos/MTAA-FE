@@ -1,8 +1,14 @@
 import SwiftUI
 
 struct MainView: View {
+    @State private var isLoggedIn = false
+    
     var body: some View {
-        LoginView()
+        if !isLoggedIn {
+            LoginView(isLoggedIn: $isLoggedIn)
+        } else {
+            CoursesView()
+        }
     }
 }
 

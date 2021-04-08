@@ -11,6 +11,14 @@
 		98067242261C7A8B00EA07C4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98067241261C7A8B00EA07C4 /* MainView.swift */; };
 		98067244261C7A8D00EA07C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98067243261C7A8D00EA07C4 /* Assets.xcassets */; };
 		98067247261C7A8D00EA07C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98067246261C7A8D00EA07C4 /* Preview Assets.xcassets */; };
+		98378753261ED97B0004FF41 /* CoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98378752261ED97B0004FF41 /* CoursesView.swift */; };
+		9837875A261EDC340004FF41 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98378759261EDC340004FF41 /* Course.swift */; };
+		9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9837875D261EE02A0004FF41 /* CourseGridItem.swift */; };
+		98378761261EE9680004FF41 /* CoursePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98378760261EE9680004FF41 /* CoursePosts.swift */; };
+		988AA09F261EEA66003600F2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA09E261EEA66003600F2 /* Post.swift */; };
+		988AA0A2261EEAC6003600F2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A1261EEAC6003600F2 /* Category.swift */; };
+		988AA0A5261EEB09003600F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A4261EEB09003600F2 /* User.swift */; };
+		988AA0A8261EEB67003600F2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A7261EEB67003600F2 /* Comment.swift */; };
 		988E3889261CE03D0015D61B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E3888261CE03D0015D61B /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +29,14 @@
 		98067243261C7A8D00EA07C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98067246261C7A8D00EA07C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		98067248261C7A8D00EA07C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98378752261ED97B0004FF41 /* CoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesView.swift; sourceTree = "<group>"; };
+		98378759261EDC340004FF41 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		9837875D261EE02A0004FF41 /* CourseGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseGridItem.swift; sourceTree = "<group>"; };
+		98378760261EE9680004FF41 /* CoursePosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePosts.swift; sourceTree = "<group>"; };
+		988AA09E261EEA66003600F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		988AA0A1261EEAC6003600F2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		988AA0A4261EEB09003600F2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		988AA0A7261EEB67003600F2 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		988E3888261CE03D0015D61B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,9 +70,9 @@
 		9806723E261C7A8A00EA07C4 /* UB Forum */ = {
 			isa = PBXGroup;
 			children = (
+				98378758261EDC200004FF41 /* Models */,
+				98378756261EDB790004FF41 /* View */,
 				9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */,
-				98067241261C7A8B00EA07C4 /* MainView.swift */,
-				988E3888261CE03D0015D61B /* LoginView.swift */,
 				98067243261C7A8D00EA07C4 /* Assets.xcassets */,
 				98067248261C7A8D00EA07C4 /* Info.plist */,
 				98067245261C7A8D00EA07C4 /* Preview Content */,
@@ -70,6 +86,30 @@
 				98067246261C7A8D00EA07C4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		98378756261EDB790004FF41 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				98067241261C7A8B00EA07C4 /* MainView.swift */,
+				988E3888261CE03D0015D61B /* LoginView.swift */,
+				98378752261ED97B0004FF41 /* CoursesView.swift */,
+				9837875D261EE02A0004FF41 /* CourseGridItem.swift */,
+				98378760261EE9680004FF41 /* CoursePosts.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		98378758261EDC200004FF41 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				988AA0A4261EEB09003600F2 /* User.swift */,
+				98378759261EDC340004FF41 /* Course.swift */,
+				988AA0A1261EEAC6003600F2 /* Category.swift */,
+				988AA09E261EEA66003600F2 /* Post.swift */,
+				988AA0A7261EEB67003600F2 /* Comment.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,8 +182,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
+				9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */,
 				98067242261C7A8B00EA07C4 /* MainView.swift in Sources */,
+				988AA09F261EEA66003600F2 /* Post.swift in Sources */,
+				9837875A261EDC340004FF41 /* Course.swift in Sources */,
+				988AA0A2261EEAC6003600F2 /* Category.swift in Sources */,
 				98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */,
+				98378761261EE9680004FF41 /* CoursePosts.swift in Sources */,
+				988AA0A5261EEB09003600F2 /* User.swift in Sources */,
+				988AA0A8261EEB67003600F2 /* Comment.swift in Sources */,
+				98378753261ED97B0004FF41 /* CoursesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
