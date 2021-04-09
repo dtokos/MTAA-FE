@@ -13,7 +13,7 @@ struct LoginView: View {
             
             TextField("Email", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            TextField("Heslo", text: $password)
+            SecureField("Heslo", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
             Button(action: logIn) {

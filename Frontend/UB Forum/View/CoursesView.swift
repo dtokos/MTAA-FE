@@ -32,13 +32,17 @@ struct CoursesView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(courses, id: \.id) { course in
-                        NavigationLink(destination: CoursePosts(course: course)) {
+                    ForEach(courses) { course in
+                        NavigationLink(destination: CoursePostsView(course: course)) {
                             CourseGridItem(course: course)
                         }
                     }
                 }.padding(.horizontal)
             }.navigationTitle("Predmety")
+            .navigationBarItems(trailing: NavigationLink(destination: ProvileView()) {
+                Image(systemName: "person.circle")
+                    .font(.system(size: 30))
+            })
         }
     }
 }

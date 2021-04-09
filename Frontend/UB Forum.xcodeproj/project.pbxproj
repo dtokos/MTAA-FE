@@ -14,7 +14,12 @@
 		98378753261ED97B0004FF41 /* CoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98378752261ED97B0004FF41 /* CoursesView.swift */; };
 		9837875A261EDC340004FF41 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98378759261EDC340004FF41 /* Course.swift */; };
 		9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9837875D261EE02A0004FF41 /* CourseGridItem.swift */; };
-		98378761261EE9680004FF41 /* CoursePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98378760261EE9680004FF41 /* CoursePosts.swift */; };
+		98378761261EE9680004FF41 /* CoursePostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98378760261EE9680004FF41 /* CoursePostsView.swift */; };
+		9858781D2620D91300178E4E /* PostGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858781C2620D91300178E4E /* PostGridItemView.swift */; };
+		985878202620E55800178E4E /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858781F2620E55800178E4E /* AddPostView.swift */; };
+		985878232620F49900178E4E /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985878222620F49900178E4E /* PostDetailView.swift */; };
+		985878262620F67D00178E4E /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985878252620F67D00178E4E /* EditPostView.swift */; };
+		985878292620FD4200178E4E /* ProvileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985878282620FD4200178E4E /* ProvileView.swift */; };
 		988AA09F261EEA66003600F2 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA09E261EEA66003600F2 /* Post.swift */; };
 		988AA0A2261EEAC6003600F2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A1261EEAC6003600F2 /* Category.swift */; };
 		988AA0A5261EEB09003600F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A4261EEB09003600F2 /* User.swift */; };
@@ -32,7 +37,12 @@
 		98378752261ED97B0004FF41 /* CoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesView.swift; sourceTree = "<group>"; };
 		98378759261EDC340004FF41 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		9837875D261EE02A0004FF41 /* CourseGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseGridItem.swift; sourceTree = "<group>"; };
-		98378760261EE9680004FF41 /* CoursePosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePosts.swift; sourceTree = "<group>"; };
+		98378760261EE9680004FF41 /* CoursePostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePostsView.swift; sourceTree = "<group>"; };
+		9858781C2620D91300178E4E /* PostGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGridItemView.swift; sourceTree = "<group>"; };
+		9858781F2620E55800178E4E /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
+		985878222620F49900178E4E /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		985878252620F67D00178E4E /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
+		985878282620FD4200178E4E /* ProvileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvileView.swift; sourceTree = "<group>"; };
 		988AA09E261EEA66003600F2 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		988AA0A1261EEAC6003600F2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		988AA0A4261EEB09003600F2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -92,10 +102,15 @@
 			isa = PBXGroup;
 			children = (
 				98067241261C7A8B00EA07C4 /* MainView.swift */,
+				985878282620FD4200178E4E /* ProvileView.swift */,
 				988E3888261CE03D0015D61B /* LoginView.swift */,
 				98378752261ED97B0004FF41 /* CoursesView.swift */,
 				9837875D261EE02A0004FF41 /* CourseGridItem.swift */,
-				98378760261EE9680004FF41 /* CoursePosts.swift */,
+				98378760261EE9680004FF41 /* CoursePostsView.swift */,
+				9858781C2620D91300178E4E /* PostGridItemView.swift */,
+				9858781F2620E55800178E4E /* AddPostView.swift */,
+				985878222620F49900178E4E /* PostDetailView.swift */,
+				985878252620F67D00178E4E /* EditPostView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,14 +197,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
+				985878202620E55800178E4E /* AddPostView.swift in Sources */,
 				9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */,
 				98067242261C7A8B00EA07C4 /* MainView.swift in Sources */,
 				988AA09F261EEA66003600F2 /* Post.swift in Sources */,
 				9837875A261EDC340004FF41 /* Course.swift in Sources */,
 				988AA0A2261EEAC6003600F2 /* Category.swift in Sources */,
+				985878262620F67D00178E4E /* EditPostView.swift in Sources */,
+				985878292620FD4200178E4E /* ProvileView.swift in Sources */,
 				98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */,
-				98378761261EE9680004FF41 /* CoursePosts.swift in Sources */,
+				9858781D2620D91300178E4E /* PostGridItemView.swift in Sources */,
+				98378761261EE9680004FF41 /* CoursePostsView.swift in Sources */,
 				988AA0A5261EEB09003600F2 /* User.swift in Sources */,
+				985878232620F49900178E4E /* PostDetailView.swift in Sources */,
 				988AA0A8261EEB67003600F2 /* Comment.swift in Sources */,
 				98378753261ED97B0004FF41 /* CoursesView.swift in Sources */,
 			);

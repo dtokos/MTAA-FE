@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-struct Course {
+struct Course: Identifiable {
     var id: Int
     var title: String
     var color: UIColor
