@@ -39,7 +39,7 @@ struct CoursesView: View {
                     }
                 }.padding(.horizontal)
             }.navigationTitle("Predmety")
-            .navigationBarItems(trailing: NavigationLink(destination: ProvileView()) {
+            .navigationBarItems(trailing: NavigationLink(destination: ProfileView()) {
                 Image(systemName: "person.circle")
                     .font(.system(size: 30))
             })

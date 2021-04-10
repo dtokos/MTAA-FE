@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ProvileView: View {
+struct ProfileView: View {
     let profileImage = UIImage(named: "userPlaceholder")!
     @State private var name = "Eugen Ártvy"
     @State private var email = "eugen.artvy@example.com"
@@ -27,7 +27,7 @@ struct ProvileView: View {
 struct ProvileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProvileView()
+            ProfileView()
         }
     }
 }
