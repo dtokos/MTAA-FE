@@ -1,6 +1,11 @@
 import SwiftUI
 
 struct CoursesView: View {
+    @ObservedObject var authVM: AuthVM
+    
+    @State private var showActions = false
+    @State private var showProfile = false
+    
     let courses = [
         Course(id: 1, title: "OOP", color: .systemGreen, createdAt: Date(), updatedAt: Date()),
         Course(id: 2, title: "AJ", color: .systemPink, createdAt: Date(), updatedAt: Date()),
@@ -38,17 +43,38 @@ struct CoursesView: View {
                         }
                     }
                 }.padding(.horizontal)
-            }.navigationTitle("Predmety")
-            .navigationBarItems(trailing: NavigationLink(destination: ProfileView()) {
+                
+                NavigationLink(destination: ProfileView(user: authVM.user), isActive: $showProfile) {}
+            }
+            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitle("Predmety")
+            /*.navigationBarItems(trailing: NavigationLink(destination: ProfileView()) {
+                
+            })*/
+            .navigationBarItems(trailing: Button(action: {
+                self.showActions = true
+            }, label: {
                 Image(systemName: "person.circle")
                     .font(.system(size: 30))
-            })
+            }))
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .actionSheet(isPresented: $showActions) { () -> ActionSheet in
+            ActionSheet(title: Text("Vyberte akciu"), message: nil, buttons: [
+                .default(Text("Profil")) {showProfile = true},
+                .destructive(Text("Odhlásiť sa")) {logOut()},
+                .cancel()
+            ])
+        }
+    }
+    
+    func logOut() {
+        authVM.logout()
     }
 }
 
 struct CoursesView_Previews: PreviewProvider {
     static var previews: some View {
-        CoursesView()
+        CoursesView(authVM: AuthVM())
     }
 }

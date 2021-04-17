@@ -1,10 +1,17 @@
 import SwiftUI
 
 struct ProfileView: View {
-    let profileImage = UIImage(named: "userPlaceholder")!
-    @State private var name = "Eugen Ártvy"
-    @State private var email = "eugen.artvy@example.com"
-    @State private var password = ""
+    @State private var profileImage: UIImage
+    @State private var name: String
+    @State private var email: String
+    @State private var password: String
+    
+    init(user: User?) {
+        self._profileImage = State(initialValue: user?.profileImage ?? UIImage(named: "userPlaceholder")!)
+        self._name = State(initialValue: user?.name ?? "")
+        self._email = State(initialValue: user?.email ?? "")
+        self._password = State(initialValue: "")
+    }
     
     var body: some View {
         Form {
@@ -16,7 +23,8 @@ struct ProfileView: View {
             TextField("Meno", text: $name)
             TextField("Email", text: $email)
             SecureField("Heslo", text: $password)
-        }.navigationTitle("Profil")
+        }
+        .navigationTitle("Profil")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button("Uložiť") {
             print("Update profile")
@@ -27,7 +35,7 @@ struct ProfileView: View {
 struct ProvileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileView()
+            ProfileView(user: nil)
         }
     }
 }

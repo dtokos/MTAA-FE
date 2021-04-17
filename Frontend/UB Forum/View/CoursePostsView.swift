@@ -35,7 +35,8 @@ struct CoursePostsView: View {
                         }).buttonStyle(PlainButtonStyle())
                 }
             }).padding()
-        }.navigationTitle(course.title)
+        }
+        .navigationTitle(course.title)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: NavigationLink(destination: AddPostView()) {
             Image(systemName: "plus")

@@ -25,14 +25,16 @@ struct EditPostView: View {
                         Text(category.title)
                             .tag(category as UB_Forum.Category?)
                     }
-                }.pickerStyle(SegmentedPickerStyle())
+                }
+                .pickerStyle(SegmentedPickerStyle())
             }
             
             Section(header: Text("Obsah")) {
                 TextEditor(text: $content)
                     .frame(minHeight: 300, alignment: .leading)
             }
-        }.navigationTitle("Upraviť príspevok")
+        }
+        .navigationTitle("Upraviť príspevok")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button("Uložiť") {
             print("Edit post")

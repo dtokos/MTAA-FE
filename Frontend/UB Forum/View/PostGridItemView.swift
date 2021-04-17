@@ -31,11 +31,13 @@ struct PostGridItemView: View {
                             .foregroundColor(.gray)
                     }
                 }
-            }.padding(.bottom, 10)
+            }
+            .padding(.bottom, 10)
             
             Text(post.content)
                 .font(.body)
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, alignment: .topLeading)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, alignment: .topLeading)
         .padding()
         .background(Color(.white))
         .overlay(
