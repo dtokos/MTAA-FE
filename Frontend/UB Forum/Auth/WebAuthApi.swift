@@ -3,6 +3,12 @@ import Combine
 
 struct WebAuthApi: AuthApi {
     private let baseUrl = URL(string: "http://mtaa.test:8888/api/auth")!
+    private let decoder: JSONDecoder
+    
+    init() {
+        decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+    }
     
     func logIn(email: String, password: String) -> AnyPublisher<AuthApiResponse, AuthApiError> {
         let request = WebAuthRequest.login(email: email, password: password).build(baseUrl: baseUrl)
@@ -15,7 +21,7 @@ struct WebAuthApi: AuthApi {
                     default: throw AuthApiError.other
                 }
             })
-            .decode(type: AuthApiResponse.self, decoder: JSONDecoder())
+            .decode(type: AuthApiResponse.self, decoder: decoder)
             .mapError({ error in
                 if let apiError = error as? AuthApiError {return apiError}
                 else {return AuthApiError.other}
@@ -45,29 +51,6 @@ struct WebAuthApi: AuthApi {
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-    }
-}
-
-protocol WebRequest {
-    var path: String { get }
-    var method: String { get }
-    var headers: [String: String]? { get }
-    func body() -> Data?
-}
-
-struct WebRequestShared {
-    static var headers = [String: String]()
-}
-
-extension WebRequest {
-    func build(baseUrl: URL) -> URLRequest {
-        let url = baseUrl.appendingPathComponent(path)
-        var request = URLRequest(url: url)
-        request.httpMethod = method
-        request.allHTTPHeaderFields = WebRequestShared.headers
-            .merging(headers ?? [String:String]()) { (_, new) in new }
-        request.httpBody = body()
-        return request
     }
 }
 

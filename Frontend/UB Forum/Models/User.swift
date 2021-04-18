@@ -29,8 +29,9 @@ extension User: Decodable {
         id = try values.decode(Int.self, forKey: .id)
         name = try values.decode(String.self, forKey: .name)
         email = try values.decode(String.self, forKey: .email)
-        profileImage = UIImage(named: "userPlaceholder")!
-        createdAt = Date()
-        updatedAt = Date()
+        let imageData = try Data(contentsOf: values.decode(URL.self, forKey: .profileImage))
+        profileImage = UIImage(data: imageData) ?? UIImage(named: "userPlaceholder")!
+        createdAt = try values.decode(Date.self, forKey: .createdAt)
+        updatedAt = try values.decode(Date.self, forKey: .updatedAt)
     }
 }

@@ -29,6 +29,7 @@
 		988AA0A5261EEB09003600F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A4261EEB09003600F2 /* User.swift */; };
 		988AA0A8261EEB67003600F2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A7261EEB67003600F2 /* Comment.swift */; };
 		988E3889261CE03D0015D61B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E3888261CE03D0015D61B /* LoginView.swift */; };
+		989D74A4262C503C002DDEF7 /* WebRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74A3262C503C002DDEF7 /* WebRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		988AA0A4261EEB09003600F2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		988AA0A7261EEB67003600F2 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		988E3888261CE03D0015D61B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		989D74A3262C503C002DDEF7 /* WebRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				9838F85E262B48A400D25383 /* Courses */,
 				98378758261EDC200004FF41 /* Models */,
 				98378756261EDB790004FF41 /* View */,
+				989D74A2262C5008002DDEF7 /* System */,
 				9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */,
 				98067243261C7A8D00EA07C4 /* Assets.xcassets */,
 				98067248261C7A8D00EA07C4 /* Info.plist */,
@@ -153,6 +156,14 @@
 			children = (
 			);
 			path = Courses;
+			sourceTree = "<group>";
+		};
+		989D74A2262C5008002DDEF7 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				989D74A3262C503C002DDEF7 /* WebRequest.swift */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +244,7 @@
 				988AA0A2261EEAC6003600F2 /* Category.swift in Sources */,
 				9838F848262B054600D25383 /* AuthApi.swift in Sources */,
 				985878262620F67D00178E4E /* EditPostView.swift in Sources */,
+				989D74A4262C503C002DDEF7 /* WebRequest.swift in Sources */,
 				9838F84B262B08D500D25383 /* MemoryAuthApi.swift in Sources */,
 				985878292620FD4200178E4E /* ProfileView.swift in Sources */,
 				98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */,
