@@ -30,6 +30,11 @@
 		988AA0A8261EEB67003600F2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988AA0A7261EEB67003600F2 /* Comment.swift */; };
 		988E3889261CE03D0015D61B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988E3888261CE03D0015D61B /* LoginView.swift */; };
 		989D74A4262C503C002DDEF7 /* WebRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74A3262C503C002DDEF7 /* WebRequest.swift */; };
+		989D74A8262C5CAB002DDEF7 /* CoursesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74A7262C5CAB002DDEF7 /* CoursesApi.swift */; };
+		989D74AB262C5DFE002DDEF7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74AA262C5DFE002DDEF7 /* UIColor.swift */; };
+		989D74AE262C6059002DDEF7 /* MemoryCoursesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74AD262C6059002DDEF7 /* MemoryCoursesApi.swift */; };
+		989D74B1262C702F002DDEF7 /* WebCoursesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74B0262C702F002DDEF7 /* WebCoursesApi.swift */; };
+		989D74B5262C891E002DDEF7 /* PostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74B4262C891E002DDEF7 /* PostsApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +63,11 @@
 		988AA0A7261EEB67003600F2 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		988E3888261CE03D0015D61B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		989D74A3262C503C002DDEF7 /* WebRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRequest.swift; sourceTree = "<group>"; };
+		989D74A7262C5CAB002DDEF7 /* CoursesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesApi.swift; sourceTree = "<group>"; };
+		989D74AA262C5DFE002DDEF7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		989D74AD262C6059002DDEF7 /* MemoryCoursesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCoursesApi.swift; sourceTree = "<group>"; };
+		989D74B0262C702F002DDEF7 /* WebCoursesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCoursesApi.swift; sourceTree = "<group>"; };
+		989D74B4262C891E002DDEF7 /* PostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +102,7 @@
 			children = (
 				9838F846262B052700D25383 /* Auth */,
 				9838F85E262B48A400D25383 /* Courses */,
+				989D74B3262C890D002DDEF7 /* Posts */,
 				98378758261EDC200004FF41 /* Models */,
 				98378756261EDB790004FF41 /* View */,
 				989D74A2262C5008002DDEF7 /* System */,
@@ -154,6 +165,9 @@
 		9838F85E262B48A400D25383 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
+				989D74A7262C5CAB002DDEF7 /* CoursesApi.swift */,
+				989D74AD262C6059002DDEF7 /* MemoryCoursesApi.swift */,
+				989D74B0262C702F002DDEF7 /* WebCoursesApi.swift */,
 			);
 			path = Courses;
 			sourceTree = "<group>";
@@ -162,8 +176,17 @@
 			isa = PBXGroup;
 			children = (
 				989D74A3262C503C002DDEF7 /* WebRequest.swift */,
+				989D74AA262C5DFE002DDEF7 /* UIColor.swift */,
 			);
 			path = System;
+			sourceTree = "<group>";
+		};
+		989D74B3262C890D002DDEF7 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				989D74B4262C891E002DDEF7 /* PostsApi.swift */,
+			);
+			path = Posts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,17 +261,22 @@
 				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
 				985878202620E55800178E4E /* AddPostView.swift in Sources */,
 				9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */,
+				989D74A8262C5CAB002DDEF7 /* CoursesApi.swift in Sources */,
 				98067242261C7A8B00EA07C4 /* MainView.swift in Sources */,
 				988AA09F261EEA66003600F2 /* Post.swift in Sources */,
 				9837875A261EDC340004FF41 /* Course.swift in Sources */,
 				988AA0A2261EEAC6003600F2 /* Category.swift in Sources */,
 				9838F848262B054600D25383 /* AuthApi.swift in Sources */,
 				985878262620F67D00178E4E /* EditPostView.swift in Sources */,
+				989D74AB262C5DFE002DDEF7 /* UIColor.swift in Sources */,
 				989D74A4262C503C002DDEF7 /* WebRequest.swift in Sources */,
 				9838F84B262B08D500D25383 /* MemoryAuthApi.swift in Sources */,
 				985878292620FD4200178E4E /* ProfileView.swift in Sources */,
+				989D74B5262C891E002DDEF7 /* PostsApi.swift in Sources */,
+				989D74B1262C702F002DDEF7 /* WebCoursesApi.swift in Sources */,
 				98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */,
 				9858781D2620D91300178E4E /* PostGridItemView.swift in Sources */,
+				989D74AE262C6059002DDEF7 /* MemoryCoursesApi.swift in Sources */,
 				98378761261EE9680004FF41 /* CoursePostsView.swift in Sources */,
 				988AA0A5261EEB09003600F2 /* User.swift in Sources */,
 				9838F852262B225700D25383 /* AuthInteractor.swift in Sources */,

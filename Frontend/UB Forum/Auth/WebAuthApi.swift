@@ -13,21 +13,21 @@ struct WebAuthApi: AuthApi {
     func logIn(email: String, password: String) -> AnyPublisher<AuthApiResponse, AuthApiError> {
         let request = WebAuthRequest.login(email: email, password: password).build(baseUrl: baseUrl)
         return URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap({ (data, res) in
+            .tryMap{(data, res) in
                 switch (res as? HTTPURLResponse)?.statusCode {
                     case .some(200): return data
                     case .some(401): throw AuthApiError.wrongCredentials
                     case .some(422): throw AuthApiError.validationError
                     default: throw AuthApiError.other
                 }
-            })
+            }
             .decode(type: AuthApiResponse.self, decoder: decoder)
-            .mapError({ error in
+            .mapError{ error in
                 if let apiError = error as? AuthApiError {return apiError}
                 else {return AuthApiError.other}
-            })
+            }
             .handleEvents(receiveOutput: { res in
-                WebRequestShared.headers["Authorization"] = "Bearer \(res.token)"
+                WebRequestShared.headers["Token"] = "Bearer \(res.token)"
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
@@ -42,12 +42,12 @@ struct WebAuthApi: AuthApi {
                     default: throw AuthApiError.other
                 }
             }
-            .mapError({ error in
+            .mapError{ error in
                 if let apiError = error as? AuthApiError {return apiError}
                 else {return AuthApiError.other}
-            })
+            }
             .handleEvents(receiveOutput: { _ in
-                WebRequestShared.headers.removeValue(forKey: "Authorization")
+                WebRequestShared.headers.removeValue(forKey: "Token")
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

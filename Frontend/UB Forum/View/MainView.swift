@@ -20,8 +20,8 @@ struct MainView_Previews: PreviewProvider {
 }
 
 class AuthVM: ObservableObject {
-    private let api: AuthApi = MemoryAuthApi()
-    //private let api: AuthApi = WebAuthApi()
+    //private let api: AuthApi = MemoryAuthApi()
+    private let api: AuthApi = WebAuthApi()
     private var cancelBag = Set<AnyCancellable>()
     
     @Published var token: String? = nil
