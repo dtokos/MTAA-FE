@@ -48,9 +48,6 @@ struct CoursesView: View {
             }
             .navigationBarTitleDisplayMode(.large)
             .navigationBarTitle("Predmety")
-            /*.navigationBarItems(trailing: NavigationLink(destination: ProfileView()) {
-                
-            })*/
             .navigationBarItems(trailing: Button(action: {
                 self.showActions = true
             }, label: {

@@ -5,12 +5,13 @@ protocol AuthApi {
     func logOut() -> AnyPublisher<Void, AuthApiError>
 }
 
-struct AuthApiResponse {
+struct AuthApiResponse: Decodable {
     let token: String
     let user: User
 }
 
 enum AuthApiError: Error {
+    case validationError
     case wrongCredentials
-    case other(Error)
+    case other
 }

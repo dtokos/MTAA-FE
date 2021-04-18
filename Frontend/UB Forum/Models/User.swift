@@ -13,3 +13,24 @@ struct User: Equatable {
         static let example = User(id: 1, name: "Eugen Ártvy", email: "", profileImage: UIImage(named: "userPlaceholder")!, createdAt: Date(), updatedAt: Date())
     #endif
 }
+
+extension User: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case email = "email"
+        case profileImage = "profile_image"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(Int.self, forKey: .id)
+        name = try values.decode(String.self, forKey: .name)
+        email = try values.decode(String.self, forKey: .email)
+        profileImage = UIImage(named: "userPlaceholder")!
+        createdAt = Date()
+        updatedAt = Date()
+    }
+}

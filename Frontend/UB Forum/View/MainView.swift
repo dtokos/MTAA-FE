@@ -21,6 +21,7 @@ struct MainView_Previews: PreviewProvider {
 
 class AuthVM: ObservableObject {
     private let api: AuthApi = MemoryAuthApi()
+    //private let api: AuthApi = WebAuthApi()
     private var cancelBag = Set<AnyCancellable>()
     
     @Published var token: String? = nil
@@ -48,9 +49,10 @@ class AuthVM: ObservableObject {
     
     public func logout() {
         api.logOut()
-            .sink {_ in } receiveValue: { _ in
+            .sink {_ in
                 self.token = nil
                 self.user = nil
-            }.store(in: &cancelBag)
+            } receiveValue: { _ in}
+            .store(in: &cancelBag)
     }
 }

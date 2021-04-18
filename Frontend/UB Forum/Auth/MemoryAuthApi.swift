@@ -4,7 +4,7 @@ import UIKit
 
 struct MemoryAuthApi: AuthApi {
     private let users = [
-        User(id: 1, name: "Eugen Ártvy", email: "eugen.artvy@gmail.com", profileImage: UIImage(named: "userPlaceholder")!, createdAt: Date(), updatedAt: Date()),
+        User(id: 1, name: "Eugen Ártvy", email: "eugen.artvy@example.com", profileImage: UIImage(named: "userPlaceholder")!, createdAt: Date(), updatedAt: Date()),
     ]
     
     func logIn(email: String, password: String) -> AnyPublisher<AuthApiResponse, AuthApiError> {
@@ -24,6 +24,7 @@ struct MemoryAuthApi: AuthApi {
     func logOut() -> AnyPublisher<Void, AuthApiError> {
         return Just<Void>(())
             .setFailureType(to: AuthApiError.self)
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }

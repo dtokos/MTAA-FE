@@ -18,6 +18,7 @@
 		9838F848262B054600D25383 /* AuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838F847262B054600D25383 /* AuthApi.swift */; };
 		9838F84B262B08D500D25383 /* MemoryAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838F84A262B08D500D25383 /* MemoryAuthApi.swift */; };
 		9838F852262B225700D25383 /* AuthInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838F851262B225700D25383 /* AuthInteractor.swift */; };
+		9838F861262B811A00D25383 /* WebAuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9838F860262B811A00D25383 /* WebAuthApi.swift */; };
 		9858781D2620D91300178E4E /* PostGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858781C2620D91300178E4E /* PostGridItemView.swift */; };
 		985878202620E55800178E4E /* AddPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9858781F2620E55800178E4E /* AddPostView.swift */; };
 		985878232620F49900178E4E /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985878222620F49900178E4E /* PostDetailView.swift */; };
@@ -44,6 +45,7 @@
 		9838F847262B054600D25383 /* AuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthApi.swift; sourceTree = "<group>"; };
 		9838F84A262B08D500D25383 /* MemoryAuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAuthApi.swift; sourceTree = "<group>"; };
 		9838F851262B225700D25383 /* AuthInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInteractor.swift; sourceTree = "<group>"; };
+		9838F860262B811A00D25383 /* WebAuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAuthApi.swift; sourceTree = "<group>"; };
 		9858781C2620D91300178E4E /* PostGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGridItemView.swift; sourceTree = "<group>"; };
 		9858781F2620E55800178E4E /* AddPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostView.swift; sourceTree = "<group>"; };
 		985878222620F49900178E4E /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
@@ -138,9 +140,10 @@
 		9838F846262B052700D25383 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				9838F851262B225700D25383 /* AuthInteractor.swift */,
 				9838F847262B054600D25383 /* AuthApi.swift */,
 				9838F84A262B08D500D25383 /* MemoryAuthApi.swift */,
-				9838F851262B225700D25383 /* AuthInteractor.swift */,
+				9838F860262B811A00D25383 /* WebAuthApi.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				988AA0A5261EEB09003600F2 /* User.swift in Sources */,
 				9838F852262B225700D25383 /* AuthInteractor.swift in Sources */,
 				985878232620F49900178E4E /* PostDetailView.swift in Sources */,
+				9838F861262B811A00D25383 /* WebAuthApi.swift in Sources */,
 				988AA0A8261EEB67003600F2 /* Comment.swift in Sources */,
 				98378753261ED97B0004FF41 /* CoursesView.swift in Sources */,
 			);

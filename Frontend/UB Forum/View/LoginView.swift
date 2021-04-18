@@ -4,8 +4,8 @@ import Combine
 struct LoginView: View {
     @ObservedObject var authVM: AuthVM
     
-    @State private var email = "eugen.artvy@gmail.com" // TODO: Remove after testing
-    @State private var password = ""
+    @State private var email = "eugen.artvy@example.com" // TODO: Remove after testing
+    @State private var password = "12345678" // TODO: Remove after testing
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -41,9 +41,9 @@ struct LoginView: View {
     
     func loginErrorMessage() -> String {
         switch authVM.error {
+            case .validationError: return "Prosím, vyplňte všetky polia"
             case .wrongCredentials: return "Zlé prihlasovacie údaje"
-            case .other: return "Skontrolujte prihlasovacie údaje a pripojenie na internet"
-            default: return ""
+            default: return "Skontrolujte prihlasovacie údaje a pripojenie na internet"
         }
     }
 }
