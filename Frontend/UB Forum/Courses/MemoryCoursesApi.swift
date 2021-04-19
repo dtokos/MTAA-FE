@@ -4,10 +4,10 @@ import UIKit
 
 struct MemoryCoursesApi: CoursesApi {
     private let courses = [
-        1 : Course(id: 1, title: "OOP", color: .systemGreen, createdAt: Date(), updatedAt: Date()),
-        2 : Course(id: 2, title: "AJ", color: .systemPink, createdAt: Date(), updatedAt: Date()),
-        3 : Course(id: 3, title: "ADM", color: .systemYellow, createdAt: Date(), updatedAt: Date()),
-        4 : Course(id: 4, title: "MA", color: .systemPurple, createdAt: Date(), updatedAt: Date()),
+        1: Course(id: 1, title: "OOP", color: .systemGreen, createdAt: Date(), updatedAt: Date()),
+        2: Course(id: 2, title: "AJ", color: .systemPink, createdAt: Date(), updatedAt: Date()),
+        3: Course(id: 3, title: "ADM", color: .systemYellow, createdAt: Date(), updatedAt: Date()),
+        4: Course(id: 4, title: "MA", color: .systemPurple, createdAt: Date(), updatedAt: Date()),
         5: Course(id: 5, title: "MIP", color: .systemPurple, createdAt: Date(), updatedAt: Date()),
         6: Course(id: 6, title: "PPI", color: .systemPink, createdAt: Date(), updatedAt: Date()),
         7: Course(id: 7, title: "PRPR", color: .systemRed, createdAt: Date(), updatedAt: Date()),

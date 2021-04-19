@@ -24,6 +24,7 @@ struct CoursesView: View {
                         }
                     }
                 }.padding(.horizontal)
+                .animation(.default)
                 
                 NavigationLink(destination: ProfileView(user: authVM.user), isActive: $showProfile) {}
             }

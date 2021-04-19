@@ -2,14 +2,16 @@ import Combine
 
 protocol PostsApi {
     func load(course: Course) -> AnyPublisher<PostsApiResponse, PostsApiError>
+    func add(course: Course, title: String, category: Category, content: String) -> AnyPublisher<PostsApiResponse, PostsApiError>
 }
 
 struct PostsApiResponse: Decodable {
-    let posts: [Int: Course]
+    let posts: [Int: Post]
     let users: [Int: User]
     let categories: [Int: Category]
 }
 
 enum PostsApiError: Error {
+    case validationError
     case other
 }

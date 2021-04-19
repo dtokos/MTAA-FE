@@ -1,24 +1,9 @@
 import SwiftUI
+import Combine
 
 struct CoursePostsView: View {
     let course: Course
-    let user = User(id: 1, name: "Eugen Ártvy", email: "", profileImage: UIImage(named: "userPlaceholder")!, createdAt: Date(), updatedAt: Date())
-    let posts = [
-        Post(id: 1, userId: 1, courseId: 1, categoryId: 0, title: "Lorem ipsum", content: "Lorem ipsum dolor sit amet...", createdAt: Date(), updatedAt: Date()),
-        Post(id: 2, userId: 1, courseId: 1, categoryId: 1, title: "In semper", content: "In semper ultricies risus...", createdAt: Date(), updatedAt: Date()),
-        Post(id: 3, userId: 1, courseId: 1, categoryId: 2, title: "Curabitur suscipit", content: "Curabitur suscipit dui id mi...", createdAt: Date(), updatedAt: Date()),
-        Post(id: 4, userId: 1, courseId: 1, categoryId: 3, title: "Proin euismod", content: "Proin euismod ex quis egestas...", createdAt: Date(), updatedAt: Date()),
-        Post(id: 5, userId: 1, courseId: 1, categoryId: 4, title: "Morbi porta", content: "Morbi porta dapibus mauris...", createdAt: Date(), updatedAt: Date()),
-        Post(id: 6, userId: 1, courseId: 1, categoryId: 4, title: "Morbi porta", content: "Morbi porta dapibus mauris...", createdAt: Date(), updatedAt: Date()),
-        Post(id: 7, userId: 1, courseId: 1, categoryId: 4, title: "Morbi porta", content: "Morbi porta dapibus mauris...", createdAt: Date(), updatedAt: Date()),
-    ]
-    let categories = [
-        Category(id: 0, title: "Prednášky", color: .systemPink, createdAt: Date(), updatedAt: Date()),
-        Category(id: 1, title: "Cvičenia", color: .systemGreen, createdAt: Date(), updatedAt: Date()),
-        Category(id: 2, title: "Zadania", color: .systemRed, createdAt: Date(), updatedAt: Date()),
-        Category(id: 3, title: "Skúšky", color: .systemYellow, createdAt: Date(), updatedAt: Date()),
-        Category(id: 4, title: "Iné", color: .systemTeal, createdAt: Date(), updatedAt: Date()),
-    ]
+    @ObservedObject private var vm = PostsVM()
     
     let columns = [
         GridItem(.flexible())
@@ -27,20 +12,26 @@ struct CoursePostsView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, content: {
-                ForEach(posts) { post in
+                ForEach(vm.posts) { post in
                     NavigationLink(
-                        destination: PostDetailView(post: post, user: user),
+                        destination: PostDetailView(post: post, user: vm.users[post.userId]!),
                         label: {
-                            PostGridItemView(post: post, category: categories[post.categoryId], user: user)
+                            PostGridItemView(post: post, category: vm.categories[post.categoryId]!, user: vm.users[post.userId]!)
                         }).buttonStyle(PlainButtonStyle())
                 }
             }).padding()
+            .animation(.default)
         }
         .navigationTitle(course.title)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: NavigationLink(destination: AddPostView()) {
+        .navigationBarItems(trailing: NavigationLink(destination: AddPostView(course: course)) {
             Image(systemName: "plus")
         })
+        .onAppear {loadPosts()}
+    }
+    
+    func loadPosts() {
+        vm.load(course: course)
     }
 }
 
@@ -49,5 +40,25 @@ struct CoursePosts_Previews: PreviewProvider {
         NavigationView {
             CoursePostsView(course: .example)
         }
+    }
+}
+
+class PostsVM: ObservableObject {
+    //private let api: PostsApi = MemoryPostsApi()
+    private let api: PostsApi = WebPostsApi()
+    private var cancelBag = Set<AnyCancellable>()
+    
+    @Published var posts = [Post]()
+    @Published var users = [Int:User]()
+    @Published var categories = [Int:Category]()
+    
+    public func load(course: Course) {
+        api.load(course: course)
+            .sink { res in print(res)
+            } receiveValue: { res in
+                self.users = res.users
+                self.categories = res.categories
+                self.posts = res.posts.values.sorted {$0.createdAt > $1.createdAt}
+            }.store(in: &cancelBag)
     }
 }

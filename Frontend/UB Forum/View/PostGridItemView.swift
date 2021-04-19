@@ -12,9 +12,13 @@ struct PostGridItemView: View {
                     Image(uiImage: user.profileImage)
                         .resizable()
                         .frame(width: 50, height: 50)
+                        .clipShape(Circle())
                     Text(user.name)
                         .font(.caption)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(nil)
                         .foregroundColor(.gray)
+                        .frame(maxWidth: 75)
                 }
                 VStack(alignment: .leading) {
                     Text(post.title)

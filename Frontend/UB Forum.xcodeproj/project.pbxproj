@@ -35,6 +35,11 @@
 		989D74AE262C6059002DDEF7 /* MemoryCoursesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74AD262C6059002DDEF7 /* MemoryCoursesApi.swift */; };
 		989D74B1262C702F002DDEF7 /* WebCoursesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74B0262C702F002DDEF7 /* WebCoursesApi.swift */; };
 		989D74B5262C891E002DDEF7 /* PostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74B4262C891E002DDEF7 /* PostsApi.swift */; };
+		989D74B8262C8A0E002DDEF7 /* MemoryPostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74B7262C8A0E002DDEF7 /* MemoryPostsApi.swift */; };
+		989D74BC262C9452002DDEF7 /* WebPostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74BB262C9452002DDEF7 /* WebPostsApi.swift */; };
+		98FA61D4262D9143009CDE99 /* CategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D3262D9143009CDE99 /* CategoriesApi.swift */; };
+		98FA61D7262D916E009CDE99 /* MemoryCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */; };
+		98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +73,11 @@
 		989D74AD262C6059002DDEF7 /* MemoryCoursesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCoursesApi.swift; sourceTree = "<group>"; };
 		989D74B0262C702F002DDEF7 /* WebCoursesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCoursesApi.swift; sourceTree = "<group>"; };
 		989D74B4262C891E002DDEF7 /* PostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsApi.swift; sourceTree = "<group>"; };
+		989D74B7262C8A0E002DDEF7 /* MemoryPostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryPostsApi.swift; sourceTree = "<group>"; };
+		989D74BB262C9452002DDEF7 /* WebPostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPostsApi.swift; sourceTree = "<group>"; };
+		98FA61D3262D9143009CDE99 /* CategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesApi.swift; sourceTree = "<group>"; };
+		98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCategoriesApi.swift; sourceTree = "<group>"; };
+		98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCategoriesApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +112,7 @@
 			children = (
 				9838F846262B052700D25383 /* Auth */,
 				9838F85E262B48A400D25383 /* Courses */,
+				98FA61D2262D9131009CDE99 /* Categories */,
 				989D74B3262C890D002DDEF7 /* Posts */,
 				98378758261EDC200004FF41 /* Models */,
 				98378756261EDB790004FF41 /* View */,
@@ -185,8 +196,20 @@
 			isa = PBXGroup;
 			children = (
 				989D74B4262C891E002DDEF7 /* PostsApi.swift */,
+				989D74B7262C8A0E002DDEF7 /* MemoryPostsApi.swift */,
+				989D74BB262C9452002DDEF7 /* WebPostsApi.swift */,
 			);
 			path = Posts;
+			sourceTree = "<group>";
+		};
+		98FA61D2262D9131009CDE99 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				98FA61D3262D9143009CDE99 /* CategoriesApi.swift */,
+				98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */,
+				98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,11 +281,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */,
 				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
 				985878202620E55800178E4E /* AddPostView.swift in Sources */,
 				9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */,
 				989D74A8262C5CAB002DDEF7 /* CoursesApi.swift in Sources */,
 				98067242261C7A8B00EA07C4 /* MainView.swift in Sources */,
+				98FA61D4262D9143009CDE99 /* CategoriesApi.swift in Sources */,
 				988AA09F261EEA66003600F2 /* Post.swift in Sources */,
 				9837875A261EDC340004FF41 /* Course.swift in Sources */,
 				988AA0A2261EEAC6003600F2 /* Category.swift in Sources */,
@@ -278,10 +303,13 @@
 				9858781D2620D91300178E4E /* PostGridItemView.swift in Sources */,
 				989D74AE262C6059002DDEF7 /* MemoryCoursesApi.swift in Sources */,
 				98378761261EE9680004FF41 /* CoursePostsView.swift in Sources */,
+				98FA61D7262D916E009CDE99 /* MemoryCategoriesApi.swift in Sources */,
 				988AA0A5261EEB09003600F2 /* User.swift in Sources */,
 				9838F852262B225700D25383 /* AuthInteractor.swift in Sources */,
 				985878232620F49900178E4E /* PostDetailView.swift in Sources */,
+				989D74B8262C8A0E002DDEF7 /* MemoryPostsApi.swift in Sources */,
 				9838F861262B811A00D25383 /* WebAuthApi.swift in Sources */,
+				989D74BC262C9452002DDEF7 /* WebPostsApi.swift in Sources */,
 				988AA0A8261EEB67003600F2 /* Comment.swift in Sources */,
 				98378753261ED97B0004FF41 /* CoursesView.swift in Sources */,
 			);

@@ -18,6 +18,7 @@ struct ProfileView: View {
             HStack(alignment: .center) {
                 Spacer()
                 Image(uiImage: profileImage)
+                    .clipShape(Circle())
                 Spacer()
             }
             TextField("Meno", text: $name)
