@@ -27,9 +27,13 @@ struct ProfileView: View {
         }
         .navigationTitle("Profil")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: Button("Uložiť") {
-            print("Update profile")
-        })
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button("Uložiť") {
+                    print("Update profile")
+                }
+            }
+        }
     }
 }
 

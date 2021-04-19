@@ -34,13 +34,17 @@ struct AddPostView: View {
             }
         }.navigationTitle("Pridať príspevok")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: Button("Pridať") {
-            addPost(course: course, title: title, category: category!, content: content)
-        }.disabled(!isAddButtonEnabled))
-        .onAppear{loadCategories()}
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button("Pridať") {
+                    addPost(course: course, title: title, category: category!, content: content)
+                }.disabled(!isAddButtonEnabled)
+            }
+        }
         .alert(isPresented: $vm.showError) {
             Alert(title: Text("Nepodarilo sa pridať príspevok"), message: Text(addErrorMessage()), dismissButton: .default(Text("OK")))
         }
+        .onAppear{loadCategories()}
     }
     
     func loadCategories() {
@@ -56,7 +60,7 @@ struct AddPostView: View {
     func addErrorMessage() -> String {
         switch vm.error {
             case .validationError: return "Prosím, vyplňte všetky polia"
-            default: return "Skontrolujte prihlasovacie údaje a pripojenie na internet"
+            default: return "Skontrolujte vyplnené údaje a pripojenie na internet"
         }
     }
 }

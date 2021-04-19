@@ -8,7 +8,8 @@ struct MainView: View {
         if !vm.isLoggedIn {
             LoginView(authVM: vm)
         } else {
-            CoursesView(authVM: vm)
+            CoursesView()
+                .environmentObject(vm)
         }
     }
 }

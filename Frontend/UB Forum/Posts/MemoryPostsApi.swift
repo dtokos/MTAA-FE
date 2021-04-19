@@ -53,4 +53,32 @@ struct MemoryPostsApi: PostsApi {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    
+    func edit(post: Post) -> AnyPublisher<PostsApiResponse, PostsApiError> {
+        if MemoryPostsApi.posts[post.id] != nil, let user = users[post.userId], let category = categories[post.categoryId] {
+            MemoryPostsApi.posts[post.id] = post
+            return Just(PostsApiResponse(posts: [post.id: post], users: [user.id: user], categories: [category.id: category]))
+                .setFailureType(to: PostsApiError.self)
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        } else {
+            return Fail(error: PostsApiError.other)
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        }
+    }
+    
+    func delete(post: Post) -> AnyPublisher<PostsApiResponse, PostsApiError> {
+        if MemoryPostsApi.posts[post.id] != nil, let user = users[post.userId], let category = categories[post.categoryId] {
+            MemoryPostsApi.posts.removeValue(forKey: post.id)
+            return Just(PostsApiResponse(posts: [post.id: post], users: [user.id: user], categories: [category.id: category]))
+                .setFailureType(to: PostsApiError.self)
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        } else {
+            return Fail(error: PostsApiError.other)
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        }
+    }
 }

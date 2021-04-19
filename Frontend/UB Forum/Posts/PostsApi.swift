@@ -3,6 +3,8 @@ import Combine
 protocol PostsApi {
     func load(course: Course) -> AnyPublisher<PostsApiResponse, PostsApiError>
     func add(course: Course, title: String, category: Category, content: String) -> AnyPublisher<PostsApiResponse, PostsApiError>
+    func edit(post: Post) -> AnyPublisher<PostsApiResponse, PostsApiError>
+    func delete(post: Post) -> AnyPublisher<PostsApiResponse, PostsApiError>
 }
 
 struct PostsApiResponse: Decodable {

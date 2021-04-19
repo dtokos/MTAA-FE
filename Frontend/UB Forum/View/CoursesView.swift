@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 struct CoursesView: View {
-    @ObservedObject var authVM: AuthVM
+    @EnvironmentObject var authVM: AuthVM
     @ObservedObject private var vm = CoursesVM()
     
     @State private var showActions = false
@@ -28,14 +28,16 @@ struct CoursesView: View {
                 
                 NavigationLink(destination: ProfileView(user: authVM.user), isActive: $showProfile) {}
             }
-            .navigationBarTitleDisplayMode(.large)
-            .navigationBarTitle("Predmety")
-            .navigationBarItems(trailing: Button(action: {
-                self.showActions = true
-            }, label: {
-                Image(systemName: "person.circle")
-                    .font(.system(size: 30))
-            }))
+            .navigationTitle("Predmety")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        self.showActions = true
+                    } label: {
+                        Image(systemName: "person.circle")
+                    }
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .actionSheet(isPresented: $showActions) { () -> ActionSheet in
@@ -44,7 +46,8 @@ struct CoursesView: View {
                 .destructive(Text("Odhlásiť sa")) {logOut()},
                 .cancel()
             ])
-        }.onAppear {loadCourses()}
+        }
+        .onAppear {loadCourses()}
     }
     
     func logOut() {
@@ -58,7 +61,7 @@ struct CoursesView: View {
 
 struct CoursesView_Previews: PreviewProvider {
     static var previews: some View {
-        CoursesView(authVM: AuthVM())
+        CoursesView().environmentObject(AuthVM())
     }
 }
 
@@ -71,8 +74,7 @@ class CoursesVM: ObservableObject {
     
     public func load() {
         api.load()
-            .sink { res in print(res)
-            } receiveValue: { res in
+            .sink{_ in} receiveValue: { res in
                 self.courses = res.courses.values.sorted {$0.title < $1.title}
             }.store(in: &cancelBag)
     }
