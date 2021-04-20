@@ -44,6 +44,9 @@
 		98CDB6DC262ED46200834C76 /* MemoryUsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6DB262ED46200834C76 /* MemoryUsersApi.swift */; };
 		98CDB6DF262EE5CD00834C76 /* WebUsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6DE262EE5CD00834C76 /* WebUsersApi.swift */; };
 		98CDB6E3262EF25F00834C76 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6E2262EF25F00834C76 /* ImagePicker.swift */; };
+		98CDB6EA262F0C2000834C76 /* CommentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6E9262F0C2000834C76 /* CommentsApi.swift */; };
+		98CDB6EF262F0CE900834C76 /* MemoryCommentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6EE262F0CE900834C76 /* MemoryCommentsApi.swift */; };
+		98CDB6F2262F154F00834C76 /* WebCommentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6F1262F154F00834C76 /* WebCommentsApi.swift */; };
 		98FA61D4262D9143009CDE99 /* CategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D3262D9143009CDE99 /* CategoriesApi.swift */; };
 		98FA61D7262D916E009CDE99 /* MemoryCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */; };
 		98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */; };
@@ -89,6 +92,9 @@
 		98CDB6DB262ED46200834C76 /* MemoryUsersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUsersApi.swift; sourceTree = "<group>"; };
 		98CDB6DE262EE5CD00834C76 /* WebUsersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebUsersApi.swift; sourceTree = "<group>"; };
 		98CDB6E2262EF25F00834C76 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		98CDB6E9262F0C2000834C76 /* CommentsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsApi.swift; sourceTree = "<group>"; };
+		98CDB6EE262F0CE900834C76 /* MemoryCommentsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCommentsApi.swift; sourceTree = "<group>"; };
+		98CDB6F1262F154F00834C76 /* WebCommentsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCommentsApi.swift; sourceTree = "<group>"; };
 		98FA61D3262D9143009CDE99 /* CategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesApi.swift; sourceTree = "<group>"; };
 		98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCategoriesApi.swift; sourceTree = "<group>"; };
 		98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCategoriesApi.swift; sourceTree = "<group>"; };
@@ -129,6 +135,7 @@
 				9838F85E262B48A400D25383 /* Courses */,
 				98FA61D2262D9131009CDE99 /* Categories */,
 				989D74B3262C890D002DDEF7 /* Posts */,
+				98CDB6E8262F0C1100834C76 /* Comments */,
 				98378758261EDC200004FF41 /* Models */,
 				98378756261EDB790004FF41 /* View */,
 				989D74A2262C5008002DDEF7 /* System */,
@@ -239,6 +246,16 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		98CDB6E8262F0C1100834C76 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				98CDB6E9262F0C2000834C76 /* CommentsApi.swift */,
+				98CDB6EE262F0CE900834C76 /* MemoryCommentsApi.swift */,
+				98CDB6F1262F154F00834C76 /* WebCommentsApi.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
 		98FA61D2262D9131009CDE99 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,15 +336,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */,
+				98CDB6F2262F154F00834C76 /* WebCommentsApi.swift in Sources */,
 				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
 				7B623141262EDC8A00E42544 /* EditCommentView.swift in Sources */,
 				985878202620E55800178E4E /* AddPostView.swift in Sources */,
 				9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */,
+				98CDB6EA262F0C2000834C76 /* CommentsApi.swift in Sources */,
 				7B62313E262ED8B300E42544 /* AddCommentView.swift in Sources */,
 				989D74A8262C5CAB002DDEF7 /* CoursesApi.swift in Sources */,
 				98067242261C7A8B00EA07C4 /* MainView.swift in Sources */,
 				98FA61D4262D9143009CDE99 /* CategoriesApi.swift in Sources */,
 				988AA09F261EEA66003600F2 /* Post.swift in Sources */,
+				98CDB6EF262F0CE900834C76 /* MemoryCommentsApi.swift in Sources */,
 				9837875A261EDC340004FF41 /* Course.swift in Sources */,
 				988AA0A2261EEAC6003600F2 /* Category.swift in Sources */,
 				9838F848262B054600D25383 /* AuthApi.swift in Sources */,

@@ -1,22 +1,22 @@
 import SwiftUI
 
 struct CommentGridItemView: View {
-//    let user: User
-    let content = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+    let comment: Comment
+    let user: User
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 10) {
-                Text("username")
+                Text(user.name)
                     .font(.caption)
                     .foregroundColor(.accentColor)
-                Text("pred 10 min")
+                Text(comment.createdAgo)
                     .font(.caption2)
                     .foregroundColor(.gray)
             }
             .padding(.bottom, 10)
             
-            Text(content)
+            Text(comment.content)
                 .font(.body)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, alignment: .topLeading)
@@ -33,6 +33,6 @@ struct CommentGridItemView: View {
 
 struct CommentGridItemView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentGridItemView()
+        CommentGridItemView(comment: .example, user: .example)
     }
 }

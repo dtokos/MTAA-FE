@@ -3,12 +3,13 @@ import Combine
 
 struct AddCommentView: View {
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject private var vm = AddCommentVM()
     
-    @State private var title: String = ""
-    @State private var category: Category? = nil
+    let post: Post
+    
     @State private var content: String = ""
     private var isAddButtonEnabled: Bool {
-        return !title.isEmpty && category != nil && !content.isEmpty
+        return !content.isEmpty
     }
     
     var body: some View {
@@ -19,27 +20,61 @@ struct AddCommentView: View {
             }
         }.navigationTitle("Pridať komentár")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: Button("Pridať") {
-//            addPost(course: course, title: title, category: category!, content: content)
-        }.disabled(!isAddButtonEnabled))
-//        .onAppear{loadCategories()}
-//        .alert(isPresented: $vm.showError) {
-//            Alert(title: Text("Nepodarilo sa pridať príspevok"), message: Text(addErrorMessage()), dismissButton: .default(Text("OK")))
-//        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button("Pridať") {
+                    addComment(post: post, content: content)
+                }.disabled(!isAddButtonEnabled)
+            }
+        }
+        .alert(isPresented: $vm.showError) {
+            Alert(title: Text("Nepodarilo sa pridať komentár"), message: Text(addErrorMessage()), dismissButton: .default(Text("OK")))
+        }
     }
     
-//    func addErrorMessage() -> String {
-//        switch vm.error {
-//            case .validationError: return "Prosím, vyplňte všetky polia"
-//            default: return "Skontrolujte prihlasovacie údaje a pripojenie na internet"
-//        }
-//    }
+    func addComment(post: Post, content: String) {
+        vm.addComment(post: post, content: content) {
+            self.presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    func addErrorMessage() -> String {
+        switch vm.error {
+            case .validationError: return "Prosím, vyplňte všetky polia"
+            default: return "Skontrolujte vyplnené údaje a pripojenie na internet"
+        }
+    }
 }
 
 struct AddCommentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AddCommentView()
+            AddCommentView(post: .example)
         }
     }
 }
+
+class AddCommentVM: ObservableObject {
+    //private let api: CommentsApi = MemoryCommentsApi()
+    private let api: CommentsApi = WebCommentsApi()
+    private var cancelBag = Set<AnyCancellable>()
+    
+    @Published var error: CommentsApiError? = nil
+    @Published var showError = false
+    
+    public func addComment(post: Post, content: String, callback: @escaping () -> Void) {
+        error = nil
+        
+        api.add(post: post, content: content)
+            .sink(receiveCompletion: {status in
+                switch status {
+                    case .failure(let error):
+                        self.error = error
+                        self.showError = true
+                    default: break
+                }
+            }, receiveValue: {_ in callback()})
+            .store(in: &cancelBag)
+    }
+}
+
