@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B62313E262ED8B300E42544 /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62313D262ED8B300E42544 /* AddCommentView.swift */; };
+		7B623141262EDC8A00E42544 /* EditCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B623140262EDC8A00E42544 /* EditCommentView.swift */; };
+		7BAE02CF262E320F00BC6846 /* CommentGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAE02CE262E320F00BC6846 /* CommentGridItemView.swift */; };
 		98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */; };
 		98067242261C7A8B00EA07C4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98067241261C7A8B00EA07C4 /* MainView.swift */; };
 		98067244261C7A8D00EA07C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98067243261C7A8D00EA07C4 /* Assets.xcassets */; };
@@ -47,6 +50,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B62313D262ED8B300E42544 /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
+		7B623140262EDC8A00E42544 /* EditCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommentView.swift; sourceTree = "<group>"; };
+		7BAE02CE262E320F00BC6846 /* CommentGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentGridItemView.swift; sourceTree = "<group>"; };
 		9806723C261C7A8A00EA07C4 /* UB Forum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UB Forum.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UB_ForumApp.swift; sourceTree = "<group>"; };
 		98067241261C7A8B00EA07C4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -156,6 +162,9 @@
 				9858781F2620E55800178E4E /* AddPostView.swift */,
 				985878222620F49900178E4E /* PostDetailView.swift */,
 				985878252620F67D00178E4E /* EditPostView.swift */,
+				7BAE02CE262E320F00BC6846 /* CommentGridItemView.swift */,
+				7B62313D262ED8B300E42544 /* AddCommentView.swift */,
+				7B623140262EDC8A00E42544 /* EditCommentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,8 +320,10 @@
 			files = (
 				98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */,
 				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
+				7B623141262EDC8A00E42544 /* EditCommentView.swift in Sources */,
 				985878202620E55800178E4E /* AddPostView.swift in Sources */,
 				9837875E261EE02A0004FF41 /* CourseGridItem.swift in Sources */,
+				7B62313E262ED8B300E42544 /* AddCommentView.swift in Sources */,
 				989D74A8262C5CAB002DDEF7 /* CoursesApi.swift in Sources */,
 				98067242261C7A8B00EA07C4 /* MainView.swift in Sources */,
 				98FA61D4262D9143009CDE99 /* CategoriesApi.swift in Sources */,
@@ -333,6 +344,7 @@
 				98CDB6D9262ED3F200834C76 /* UsersApi.swift in Sources */,
 				98378761261EE9680004FF41 /* CoursePostsView.swift in Sources */,
 				98FA61D7262D916E009CDE99 /* MemoryCategoriesApi.swift in Sources */,
+				7BAE02CF262E320F00BC6846 /* CommentGridItemView.swift in Sources */,
 				988AA0A5261EEB09003600F2 /* User.swift in Sources */,
 				9838F852262B225700D25383 /* AuthInteractor.swift in Sources */,
 				985878232620F49900178E4E /* PostDetailView.swift in Sources */,

@@ -21,6 +21,18 @@ struct PostDetailView: View {
                 Spacer(minLength: 20)
                 Text("Komentáre")
                     .font(.headline)
+                    .padding(.bottom, 10)
+                CommentGridItemView()
+                CommentGridItemView()
+                Button(action: {}) {
+                    Text("Pridať komentár")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .animation(.default)
             }.padding()
         }
         .navigationTitle("Detail príspevku")
