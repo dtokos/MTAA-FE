@@ -19,7 +19,7 @@ struct WebUsersApi: UsersApi {
                 switch (res as? HTTPURLResponse)?.statusCode {
                     case .some(200): return data
                     case .some(422): throw UsersApiError.validationError
-                    default: throw AuthApiError.other
+                    default: throw UsersApiError.other
                 }
             }
             .decode(type: UsersApiResponse.self, decoder: decoder)

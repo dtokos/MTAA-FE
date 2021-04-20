@@ -37,7 +37,7 @@ struct WebPostsApi: PostsApi {
                 switch (res as? HTTPURLResponse)?.statusCode {
                     case .some(200): return data
                     case .some(422): throw PostsApiError.validationError
-                    default: throw AuthApiError.other
+                    default: throw PostsApiError.other
                 }
             }
             .decode(type: PostsApiResponse.self, decoder: decoder)
@@ -58,7 +58,7 @@ struct WebPostsApi: PostsApi {
                 switch (res as? HTTPURLResponse)?.statusCode {
                     case .some(200): return data
                     case .some(422): throw PostsApiError.validationError
-                    default: throw AuthApiError.other
+                    default: throw PostsApiError.other
                 }
             }
             .decode(type: PostsApiResponse.self, decoder: decoder)
@@ -78,7 +78,7 @@ struct WebPostsApi: PostsApi {
             .tryMap{(data, res) in
                 switch (res as? HTTPURLResponse)?.statusCode {
                     case .some(200): return data
-                    default: throw AuthApiError.other
+                    default: throw PostsApiError.other
                 }
             }
             .decode(type: PostsApiResponse.self, decoder: decoder)
