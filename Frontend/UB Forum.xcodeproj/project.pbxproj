@@ -37,6 +37,10 @@
 		989D74B5262C891E002DDEF7 /* PostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74B4262C891E002DDEF7 /* PostsApi.swift */; };
 		989D74B8262C8A0E002DDEF7 /* MemoryPostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74B7262C8A0E002DDEF7 /* MemoryPostsApi.swift */; };
 		989D74BC262C9452002DDEF7 /* WebPostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989D74BB262C9452002DDEF7 /* WebPostsApi.swift */; };
+		98CDB6D9262ED3F200834C76 /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6D8262ED3F200834C76 /* UsersApi.swift */; };
+		98CDB6DC262ED46200834C76 /* MemoryUsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6DB262ED46200834C76 /* MemoryUsersApi.swift */; };
+		98CDB6DF262EE5CD00834C76 /* WebUsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6DE262EE5CD00834C76 /* WebUsersApi.swift */; };
+		98CDB6E3262EF25F00834C76 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6E2262EF25F00834C76 /* ImagePicker.swift */; };
 		98FA61D4262D9143009CDE99 /* CategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D3262D9143009CDE99 /* CategoriesApi.swift */; };
 		98FA61D7262D916E009CDE99 /* MemoryCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */; };
 		98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */; };
@@ -75,6 +79,10 @@
 		989D74B4262C891E002DDEF7 /* PostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsApi.swift; sourceTree = "<group>"; };
 		989D74B7262C8A0E002DDEF7 /* MemoryPostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryPostsApi.swift; sourceTree = "<group>"; };
 		989D74BB262C9452002DDEF7 /* WebPostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPostsApi.swift; sourceTree = "<group>"; };
+		98CDB6D8262ED3F200834C76 /* UsersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
+		98CDB6DB262ED46200834C76 /* MemoryUsersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUsersApi.swift; sourceTree = "<group>"; };
+		98CDB6DE262EE5CD00834C76 /* WebUsersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebUsersApi.swift; sourceTree = "<group>"; };
+		98CDB6E2262EF25F00834C76 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		98FA61D3262D9143009CDE99 /* CategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesApi.swift; sourceTree = "<group>"; };
 		98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCategoriesApi.swift; sourceTree = "<group>"; };
 		98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCategoriesApi.swift; sourceTree = "<group>"; };
@@ -111,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				9838F846262B052700D25383 /* Auth */,
+				98CDB6D7262ED3D700834C76 /* Users */,
 				9838F85E262B48A400D25383 /* Courses */,
 				98FA61D2262D9131009CDE99 /* Categories */,
 				989D74B3262C890D002DDEF7 /* Posts */,
@@ -136,6 +145,7 @@
 		98378756261EDB790004FF41 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				98CDB6E1262EF25400834C76 /* Utilities */,
 				98067241261C7A8B00EA07C4 /* MainView.swift */,
 				985878282620FD4200178E4E /* ProfileView.swift */,
 				988E3888261CE03D0015D61B /* LoginView.swift */,
@@ -200,6 +210,24 @@
 				989D74BB262C9452002DDEF7 /* WebPostsApi.swift */,
 			);
 			path = Posts;
+			sourceTree = "<group>";
+		};
+		98CDB6D7262ED3D700834C76 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				98CDB6D8262ED3F200834C76 /* UsersApi.swift */,
+				98CDB6DB262ED46200834C76 /* MemoryUsersApi.swift */,
+				98CDB6DE262EE5CD00834C76 /* WebUsersApi.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		98CDB6E1262EF25400834C76 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				98CDB6E2262EF25F00834C76 /* ImagePicker.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		98FA61D2262D9131009CDE99 /* Categories */ = {
@@ -302,14 +330,18 @@
 				98067240261C7A8B00EA07C4 /* UB_ForumApp.swift in Sources */,
 				9858781D2620D91300178E4E /* PostGridItemView.swift in Sources */,
 				989D74AE262C6059002DDEF7 /* MemoryCoursesApi.swift in Sources */,
+				98CDB6D9262ED3F200834C76 /* UsersApi.swift in Sources */,
 				98378761261EE9680004FF41 /* CoursePostsView.swift in Sources */,
 				98FA61D7262D916E009CDE99 /* MemoryCategoriesApi.swift in Sources */,
 				988AA0A5261EEB09003600F2 /* User.swift in Sources */,
 				9838F852262B225700D25383 /* AuthInteractor.swift in Sources */,
 				985878232620F49900178E4E /* PostDetailView.swift in Sources */,
 				989D74B8262C8A0E002DDEF7 /* MemoryPostsApi.swift in Sources */,
+				98CDB6DF262EE5CD00834C76 /* WebUsersApi.swift in Sources */,
 				9838F861262B811A00D25383 /* WebAuthApi.swift in Sources */,
+				98CDB6E3262EF25F00834C76 /* ImagePicker.swift in Sources */,
 				989D74BC262C9452002DDEF7 /* WebPostsApi.swift in Sources */,
+				98CDB6DC262ED46200834C76 /* MemoryUsersApi.swift in Sources */,
 				988AA0A8261EEB67003600F2 /* Comment.swift in Sources */,
 				98378753261ED97B0004FF41 /* CoursesView.swift in Sources */,
 			);

@@ -26,7 +26,7 @@ struct CoursesView: View {
                 }.padding(.horizontal)
                 .animation(.default)
                 
-                NavigationLink(destination: ProfileView(user: authVM.user), isActive: $showProfile) {}
+                NavigationLink(destination: ProfileView(isActive: $showProfile), isActive: $showProfile) {}
             }
             .navigationTitle("Predmety")
             .toolbar {
