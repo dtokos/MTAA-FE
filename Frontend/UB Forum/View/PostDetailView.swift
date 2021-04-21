@@ -2,17 +2,27 @@ import SwiftUI
 import Combine
 
 struct PostDetailView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var authVM: AuthVM
-    @ObservedObject var vm: ShowPostVM = ShowPostVM()
-    @State var showEdit: Bool = false
-    @State var showDeletePost: Bool = false
-    @State var showDeleteComment: Bool = false
+    enum ActiveSheet: Identifiable {
+        case deletePost
+        case deleteComment(comment: Comment)
+        
+        var id: Int {
+            switch self {
+                case .deletePost: return 0
+                case .deleteComment: return 1
+            }
+        }
+    }
     
-    @State var post: Post
-    @State var category: Category
-    @State var deletingComment: Comment? = nil
-    var user: User
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var interactors: Interactors
+    
+    @Binding var isActive: Bool
+    
+    @State var showEdit: Bool = false
+    @State var showAddComment: Bool = false
+    @State var showEditComment: Bool = false
+    @State var activeSheet: ActiveSheet? = nil
     
     let columns = [
         GridItem(.flexible())
@@ -20,33 +30,37 @@ struct PostDetailView: View {
     
     var body: some View {
         ScrollView {
+            NavigationLink(destination: EditPostView(isActive: $showEdit), isActive: $showEdit) {EmptyView()}
+            NavigationLink(destination: AddCommentView(isActive: $showAddComment), isActive: $showAddComment) {EmptyView()}
+            NavigationLink(destination: EditCommentView(isActive: $showEditComment), isActive: $showEditComment) {EmptyView()}
+            
             VStack(alignment: .leading) {
-                NavigationLink(destination: EditPostView(post: $post, category: $category, isActive: $showEdit), isActive: $showEdit) {}
-                NavigationLink(destination: EditCommentView(post: post).environmentObject(vm), isActive: $vm.showEditComment) {}
+                PostGridItemView(
+                    post: state.postsSeleted!,
+                    category: state.categories[state.postsSeleted!.categoryId]!,
+                    user: state.users[state.postsSeleted!.userId]!
+                )
                 
-                PostGridItemView(post: post, category: category, user: user)
                 Spacer(minLength: 20)
                 Text("Komentáre")
                     .font(.headline)
                     .padding(.bottom, 10)
                 
-                LazyVGrid(columns: columns, content: {
-                    ForEach(vm.comments) {comment in
+                LazyVGrid(columns: columns) {
+                    ForEach(state.commentsByDate) {comment in
                         ZStack(alignment: .topTrailing) {
-                            CommentGridItemView(comment: comment, user: vm.users[comment.userId]!)
-                            if comment.userId == authVM.user?.id {
+                            CommentGridItemView(comment: comment, user: state.users[comment.userId]!)
+                            if comment.userId == state.authUser?.id {
                                 HStack {
                                     Spacer()
                                     Button {
-                                        self.vm.editingCommentContent = comment.content
-                                        self.vm.editingComment = comment
-                                        self.vm.showEditComment = true
+                                        self.state.commentsSelected = comment
+                                        self.showEditComment = true
                                     } label: {
                                         Image(systemName: "square.and.pencil")
                                     }
                                     Button {
-                                        self.deletingComment = comment
-                                        self.showDeleteComment = true
+                                        self.activeSheet = .deleteComment(comment: comment)
                                     } label: {
                                         Image(systemName: "trash")
                                     }
@@ -55,70 +69,84 @@ struct PostDetailView: View {
                             }
                         }
                     }
-                })
-                .padding()
-                .animation(.default)
-                
-                NavigationLink(
-                    destination: AddCommentView(post: post),
-                    label: {
+                    
+                    Button(action: {self.showAddComment = true}) {
                         Text("Pridať komentár")
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 10)
                             .foregroundColor(.white)
                             .background(Color.blue)
                             .cornerRadius(8)
-                    })
-            }.padding()
+                    }
+                }
+                .padding()
+                .animation(.default)
+            }
+            .padding()
+            
+            Text("")
+                .hidden()
+                .alert(item: $state.postsDeleteError) {_ in
+                    Alert(
+                        title: Text("Nepodarilo sa vymazať príspevok"),
+                        message: Text("Skontrolujte svoje pripojenie na internet a skúste znova"),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+            
+            Text("")
+                .hidden()
+                .alert(item: $state.commentsDeleteError) {_ in
+                    Alert(
+                        title: Text("Nepodarilo sa vymazať komentár"),
+                        message: Text("Skontrolujte svoje pripojenie na internet a skúste znova"),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
         }
         .navigationTitle("Detail príspevku")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                if authVM.user?.id == user.id {
-                    Button {
-                        self.showEdit = true
-                    } label: {
+                if state.authUser?.id == state.postsSeleted?.userId {
+                    Button(action: {self.showEdit = true}) {
                         Image(systemName: "square.and.pencil")
                     }
-                    Button {
-                        self.showDeletePost = true
-                    } label: {
+                    Button(action: {self.activeSheet = .deletePost}) {
                         Image(systemName: "trash")
                     }
                 }
             }
         }
-        .actionSheet(isPresented: $showDeletePost) { () -> ActionSheet in
-            ActionSheet(title: Text("Naozaj chcete vymazať príspevok"), message: nil, buttons: [
-                .destructive(Text("Vymazať")) {deletePost()},
-                .cancel()
-            ])
-        }
-        .actionSheet(isPresented: $showDeleteComment) { () -> ActionSheet in
-            ActionSheet(title: Text("Naozaj chcete vymazať komentár"), message: nil, buttons: [
-                .destructive(Text("Vymazať")) {deleteComment()},
-                .cancel()
-            ])
-        }
-        .alert(isPresented: $vm.showError) {
-            Alert(title: Text("Nepodarilo sa pridať príspevok"), message: Text("Skontrolujte svoje pripojenie na internet a skúste znova"), dismissButton: .default(Text("OK")))
+        .actionSheet(item: $activeSheet) {sheet in
+            if case .deleteComment(let comment) = sheet {
+                return ActionSheet(title: Text("Naozaj chcete vymazať komentár"), message: nil, buttons: [
+                    .destructive(Text("Vymazať")) {deleteComment(comment: comment)},
+                    .cancel()
+                ])
+            } else {
+                return ActionSheet(title: Text("Naozaj chcete vymazať príspevok"), message: nil, buttons: [
+                    .destructive(Text("Vymazať")) {deletePost()},
+                    .cancel()
+                ])
+            }
         }
         .onAppear {loadComments()}
     }
     
     func loadComments() {
-        vm.loadComments(post: post)
+        guard let post = state.postsSeleted else {return}
+        interactors.comments.load(post: post)
     }
     
-    func deleteComment() {
-        guard let comment = deletingComment else {return}
-        vm.deleteComment(post: post, comment: comment)
+    func deleteComment(comment: Comment) {
+        guard let post = state.postsSeleted else {return}
+        interactors.comments.delete(post: post, comment: comment)
     }
     
     func deletePost() {
-        vm.deletePost(post: post) {
-            presentationMode.wrappedValue.dismiss()
+        interactors.posts.delete(post: state.postsSeleted!) {
+            self.isActive = false
         }
     }
 }
@@ -126,87 +154,7 @@ struct PostDetailView: View {
 struct PostDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PostDetailView(post: .example, category: .example, user: .example)
+            PostDetailView(isActive: .constant(true))
         }
-    }
-}
-
-class ShowPostVM: ObservableObject {
-    //private let postsApi: PostsApi = MemoryPostsApi()
-    private let postsApi: PostsApi = WebPostsApi()
-    //private let commentsApi: CommentsApi = MemoryCommentsApi()
-    private let commentsApi: CommentsApi = WebCommentsApi()
-    private var cancelBag = Set<AnyCancellable>()
-    
-    @Published var comments = [Comment]()
-    @Published var users = [Int:User]()
-    @Published var error: PostsApiError? = nil
-    @Published var showError = false
-    
-    @Published var commentError: CommentsApiError? = nil
-    @Published var showCommentError = false
-    
-    @Published var editingComment: Comment? = nil
-    @Published var editingCommentContent: String = ""
-    @Published var editCommentError: CommentsApiError? = nil
-    @Published var showEditCommentError: Bool = false
-    @Published var showEditComment: Bool = false
-    var isEditCommentButtonEnabled: Bool {
-        return editingComment != nil && !editingCommentContent.isEmpty
-    }
-    
-    public func loadComments(post: Post) {
-        commentsApi.load(post: post)
-            .sink(receiveCompletion: {_ in}) {res in
-                self.comments = res.comments.values.sorted {$0.createdAt < $1.createdAt}
-                self.users = res.users
-            }
-            .store(in: &cancelBag)
-    }
-    
-    public func editComment(post: Post) {
-        guard var comment = editingComment else {return}
-        comment.content = editingCommentContent
-        commentsApi.edit(post: post, comment: comment)
-            .sink(receiveCompletion: {status in
-                switch status {
-                    case .failure(let error):
-                        self.commentError = error
-                        self.showCommentError = true
-                    default: break
-                }
-            }, receiveValue: {_ in self.showEditComment = false})
-            .store(in: &cancelBag)
-    }
-    
-    public func deleteComment(post: Post, comment: Comment) {
-        commentsApi.delete(post: post, comment: comment)
-            .sink(receiveCompletion: {status in
-                switch status {
-                    case .failure(let error):
-                        self.commentError = error
-                        self.showCommentError = true
-                    default: break
-                }
-            }, receiveValue: {res in
-                let keys = res.comments.keys
-                self.comments = self.comments.filter{!keys.contains($0.id)}
-            })
-            .store(in: &cancelBag)
-    }
-    
-    public func deletePost(post: Post, callback: @escaping () -> Void) {
-        error = nil
-        
-        postsApi.delete(post: post)
-            .sink(receiveCompletion: {status in
-                switch status {
-                    case .failure(let error):
-                        self.error = error
-                        self.showError = true
-                    default: break
-                }
-            }, receiveValue: {_ in callback()})
-            .store(in: &cancelBag)
     }
 }

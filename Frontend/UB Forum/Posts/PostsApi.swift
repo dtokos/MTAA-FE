@@ -17,3 +17,7 @@ enum PostsApiError: Error {
     case validationError
     case other
 }
+
+extension PostsApiError: Identifiable {
+    var id: Int { hashValue }
+}

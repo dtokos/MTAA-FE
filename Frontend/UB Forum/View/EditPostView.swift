@@ -2,36 +2,36 @@ import SwiftUI
 import Combine
 
 struct EditPostView: View {
-    @ObservedObject private var vm: EditPostVM
-    @Binding var post: Post
-    @Binding var category: Category
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var interactors: Interactors
+    
     @Binding var isActive: Bool
     
-    init(post: Binding<Post>, category: Binding<Category>, isActive: Binding<Bool>) {
-        vm = EditPostVM(post: post.wrappedValue, category: category.wrappedValue)
-        self._post = post
-        self._category = category
-        self._isActive = isActive
+    @State private var title: String = ""
+    @State private var categoryId: Int? = nil
+    @State private var content: String = ""
+    var isEditEnabled: Bool {
+        return !title.isEmpty && categoryId != nil && !content.isEmpty
     }
     
     var body: some View {
         Form {
             Section(header: Text("Názov")) {
-                TextField("Lorem ipsum", text: $vm.title)
+                TextField("Lorem ipsum", text: $title)
             }
             
             Section(header: Text("Kategória")) {
-                Picker("Kategória", selection: $vm.categoryId) {
-                    ForEach(vm.categories, id: \.self) { category in
+                Picker("Kategória", selection: $categoryId) {
+                    ForEach(state.categoriesByName) {category in
                         Text(category.title)
-                            .tag(category.id)
+                            .tag(category.id as Int?)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
             
             Section(header: Text("Obsah")) {
-                TextEditor(text: $vm.content)
+                TextEditor(text: $content)
                     .frame(minHeight: 300, alignment: .leading)
             }
         }
@@ -41,29 +41,44 @@ struct EditPostView: View {
             ToolbarItem(placement: .primaryAction) {
                 Button("Uložiť") {
                     editPost()
-                }.disabled(!vm.isEditButtonEnabled)
+                }
+                .disabled(!isEditEnabled)
             }
         }
-        .alert(isPresented: $vm.showError) {
-            Alert(title: Text("Nepodarilo sa upraviť príspevok"), message: Text(editErrorMessage()), dismissButton: .default(Text("OK")))
+        .alert(item: $state.postsEditError) {error in
+            Alert(
+                title: Text("Nepodarilo sa upraviť príspevok"),
+                message: Text(editErrorMessage(error: error)),
+                dismissButton: .default(Text("OK"))
+            )
         }
-        .onAppear{loadCategories()}
+        .onAppear {
+            loadCategories()
+            guard let post = state.postsSeleted else {return}
+            title = post.title
+            categoryId = post.categoryId
+            content = post.content
+        }
     }
     
     func loadCategories() {
-        vm.loadCategories()
+        interactors.categories.load()
     }
     
     func editPost() {
-        vm.editPost {res in
-            if let post = res.posts[post.id] {self.post = post}
-            if let category = res.categories[post.categoryId] {self.category = category}
+        guard let categoryId = categoryId,
+            var post = state.postsSeleted else {return}
+        post.title = title
+        post.categoryId = categoryId
+        post.content = content
+        
+        interactors.posts.edit(post: post) {
             self.isActive = false
         }
     }
     
-    func editErrorMessage() -> String {
-        switch vm.error {
+    func editErrorMessage(error: PostsApiError) -> String {
+        switch error {
             case .validationError: return "Prosím, vyplňte všetky polia"
             default: return "Skontrolujte vyplnené údaje a pripojenie na internet"
         }
@@ -73,64 +88,7 @@ struct EditPostView: View {
 struct EditPostView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            EditPostView(post: .constant(.example), category: .constant(.example), isActive: .constant(true))
+            EditPostView(isActive: .constant(true))
         }
-    }
-}
-
-class EditPostVM: ObservableObject {
-    //private let postsApi: PostsApi = MemoryPostsApi()
-    private let postsApi: PostsApi = WebPostsApi()
-    //private let categoriesApi: CategoriesApi = MemoryCategoriesApi()
-    private let categoriesApi: CategoriesApi = WebCategoriesApi()
-    private var cancelBag = Set<AnyCancellable>()
-    
-    private var post: Post
-    
-    @Published var title: String
-    @Published var categoryId: Int
-    @Published var content: String
-    
-    @Published var categories: [Category]
-    
-    @Published var error: PostsApiError? = nil
-    @Published var showError = false
-    var isEditButtonEnabled: Bool {
-        return !title.isEmpty && !content.isEmpty
-    }
-    
-    init(post: Post, category: Category) {
-        self.post = post
-        
-        title = post.title
-        categoryId = post.categoryId
-        content = post.content
-        categories = [category]
-    }
-    
-    public func loadCategories() {
-        categoriesApi.load()
-            .sink(receiveCompletion: {_ in}, receiveValue: {res in
-                self.categories = res.categories.values.sorted {$0.title < $1.title}
-            })
-            .store(in: &cancelBag)
-    }
-    
-    public func editPost(callback: @escaping (PostsApiResponse) -> Void) {
-        error = nil
-        post.title = title
-        post.categoryId = categoryId
-        post.content = content
-        
-        postsApi.edit(post: post)
-            .sink(receiveCompletion: {status in
-                switch status {
-                    case .failure(let error):
-                        self.error = error
-                        self.showError = true
-                    default: break
-                }
-            }, receiveValue: {res in callback(res)})
-            .store(in: &cancelBag)
     }
 }

@@ -2,11 +2,12 @@ import SwiftUI
 import Combine
 
 struct CoursesView: View {
-    @EnvironmentObject var authVM: AuthVM
-    @ObservedObject private var vm = CoursesVM()
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var interactors: Interactors
     
-    @State private var showActions = false
+    @State private var showCourse = false
     @State private var showProfile = false
+    @State private var showActions = false
     
     let columns = [
         GridItem(.flexible()),
@@ -17,16 +18,20 @@ struct CoursesView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(vm.courses) { course in
-                        NavigationLink(destination: CoursePostsView(course: course)) {
-                            CourseGridItem(course: course)
-                        }
-                    }
-                }.padding(.horizontal)
-                .animation(.default)
-                
+                NavigationLink(destination: CoursePostsView(isActive: $showCourse), isActive: $showCourse) {}
                 NavigationLink(destination: ProfileView(isActive: $showProfile), isActive: $showProfile) {}
+                
+                LazyVGrid(columns: columns) {
+                    ForEach(state.coursesByName) {course in
+                        CourseGridItem(course: course)
+                            .onTapGesture {
+                                self.state.coursesSelected = course
+                                self.showCourse = true
+                            }
+                    }
+                }
+                .padding(.horizontal)
+                .animation(.default)
             }
             .navigationTitle("Predmety")
             .toolbar {
@@ -40,43 +45,29 @@ struct CoursesView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .actionSheet(isPresented: $showActions) { () -> ActionSheet in
+        .actionSheet(isPresented: $showActions) {
             ActionSheet(title: Text("Vyberte akciu"), message: nil, buttons: [
                 .default(Text("Profil")) {showProfile = true},
                 .destructive(Text("Odhlásiť sa")) {logOut()},
                 .cancel()
             ])
         }
-        .onAppear {loadCourses()}
+        .onAppear {
+            loadCourses()
+        }
     }
     
     func logOut() {
-        authVM.logout()
+        interactors.auth.logOut()
     }
     
     func loadCourses() {
-        vm.load()
+        interactors.courses.load()
     }
 }
 
 struct CoursesView_Previews: PreviewProvider {
     static var previews: some View {
-        CoursesView().environmentObject(AuthVM())
+        CoursesView()
     }
 }
-
-class CoursesVM: ObservableObject {
-    //private let api: CoursesApi = MemoryCoursesApi()
-    private let api: CoursesApi = WebCoursesApi()
-    private var cancelBag = Set<AnyCancellable>()
-    
-    @Published var courses = [Course]()
-    
-    public func load() {
-        api.load()
-            .sink{_ in} receiveValue: { res in
-                self.courses = res.courses.values.sorted {$0.title < $1.title}
-            }.store(in: &cancelBag)
-    }
-}
-

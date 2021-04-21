@@ -16,3 +16,7 @@ enum CommentsApiError: Error {
     case validationError
     case other
 }
+
+extension CommentsApiError: Identifiable {
+    var id: Int { hashValue }
+}

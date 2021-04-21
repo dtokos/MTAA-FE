@@ -2,7 +2,8 @@ import SwiftUI
 import Combine
 
 struct LoginView: View {
-    @ObservedObject var authVM: AuthVM
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var interactors: Interactors
     
     @State private var email = "eugen.artvy@example.com" // TODO: Remove after testing
     @State private var password = "12345678" // TODO: Remove after testing
@@ -17,6 +18,7 @@ struct LoginView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
+            
             SecureField("Heslo", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
@@ -30,17 +32,21 @@ struct LoginView: View {
             }
         }
         .padding(.horizontal)
-        .alert(isPresented: $authVM.showError) {
-            Alert(title: Text("Nepodarilo sa prihlásiť"), message: Text(loginErrorMessage()), dismissButton: .default(Text("OK")))
+        .alert(item: $state.authLoginError) {error in
+            Alert(
+                title: Text("Nepodarilo sa prihlásiť"),
+                message: Text(loginErrorMessage(error: error)),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
     
     func logIn() {
-        authVM.logIn(email: email, password: password)
+        interactors.auth.logIn(email: email, password: password)
     }
     
-    func loginErrorMessage() -> String {
-        switch authVM.error {
+    func loginErrorMessage(error: AuthApiError) -> String {
+        switch error {
             case .validationError: return "Prosím, vyplňte všetky polia"
             case .wrongCredentials: return "Zlé prihlasovacie údaje"
             default: return "Skontrolujte prihlasovacie údaje a pripojenie na internet"
@@ -50,6 +56,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(authVM: AuthVM())
+        LoginView()
     }
 }

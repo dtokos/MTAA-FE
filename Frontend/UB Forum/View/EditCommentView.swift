@@ -2,31 +2,58 @@ import SwiftUI
 import Combine
 
 struct EditCommentView: View {
-    @EnvironmentObject private var vm: ShowPostVM
-    let post: Post
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var interactors: Interactors
+    
+    @Binding var isActive: Bool
+    
+    @State private var content: String = ""
+    var isEditEnabled: Bool {
+        return !content.isEmpty
+    }
     
     var body: some View {
         Form {
             Section(header: Text("Komentár")) {
-                TextEditor(text: $vm.editingCommentContent)
+                TextEditor(text: $content)
                     .frame(minHeight: 300, alignment: .leading)
             }
-        }.navigationTitle("Upraviť komentár")
+        }
+        .navigationTitle("Upraviť komentár")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button("Uložiť") {
-                    vm.editComment(post: post)
-                }.disabled(!vm.isEditCommentButtonEnabled)
+                    editComment()
+                }
+                .disabled(!isEditEnabled)
             }
         }
-        .alert(isPresented: $vm.showEditCommentError) {
-            Alert(title: Text("Nepodarilo sa upraviť komentár"), message: Text(editErrorMessage()), dismissButton: .default(Text("OK")))
+        .alert(item: $state.commentsEditError) {error in
+            Alert(
+                title: Text("Nepodarilo sa upraviť komentár"),
+                message: Text(editErrorMessage(error: error)),
+                dismissButton: .default(Text("OK"))
+            )
+        }
+        .onAppear {
+            guard let comment = state.commentsSelected else {return}
+            content = comment.content
         }
     }
     
-    func editErrorMessage() -> String {
-        switch vm.editCommentError {
+    func editComment() {
+        guard let post = state.postsSeleted,
+              var comment = state.commentsSelected else {return}
+        comment.content = content
+        
+        interactors.comments.edit(post: post, comment: comment) {
+            self.isActive = false
+        }
+    }
+    
+    func editErrorMessage(error: CommentsApiError) -> String {
+        switch error {
             case .validationError: return "Prosím, vyplňte všetky polia"
             default: return "Skontrolujte vyplnené údaje a pripojenie na internet"
         }
@@ -36,7 +63,7 @@ struct EditCommentView: View {
 struct EditCommentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            EditCommentView(post: .example)
+            EditCommentView(isActive: .constant(true))
         }
     }
 }

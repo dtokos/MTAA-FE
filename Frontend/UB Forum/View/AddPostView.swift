@@ -2,15 +2,16 @@ import SwiftUI
 import Combine
 
 struct AddPostView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @ObservedObject private var vm = AddPostVM()
-    let course: Course
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var interactors: Interactors
+    
+    @Binding var isActive: Bool
     
     @State private var title: String = ""
-    @State private var category: Category? = nil
+    @State private var categoryId: Int? = nil
     @State private var content: String = ""
-    private var isAddButtonEnabled: Bool {
-        return !title.isEmpty && category != nil && !content.isEmpty
+    private var isAddEnabled: Bool {
+        return !title.isEmpty && categoryId != nil && !content.isEmpty
     }
     
     var body: some View {
@@ -20,45 +21,56 @@ struct AddPostView: View {
             }
             
             Section(header: Text("Kategória")) {
-                Picker("Kategória", selection: $category) {
-                    ForEach(vm.categories, id: \.self) { category in
+                Picker("Kategória", selection: $categoryId) {
+                    ForEach(state.categoriesByName) { category in
                         Text(category.title)
-                            .tag(category as UB_Forum.Category?)
+                            .tag(category.id as Int?)
                     }
-                }.pickerStyle(SegmentedPickerStyle())
+                }
+                .pickerStyle(SegmentedPickerStyle())
             }
             
             Section(header: Text("Obsah")) {
                 TextEditor(text: $content)
                     .frame(minHeight: 300, alignment: .leading)
             }
-        }.navigationTitle("Pridať príspevok")
+        }
+        .navigationTitle("Pridať príspevok")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button("Pridať") {
-                    addPost(course: course, title: title, category: category!, content: content)
-                }.disabled(!isAddButtonEnabled)
+                    addPost()
+                }
+                .disabled(!isAddEnabled)
             }
         }
-        .alert(isPresented: $vm.showError) {
-            Alert(title: Text("Nepodarilo sa pridať príspevok"), message: Text(addErrorMessage()), dismissButton: .default(Text("OK")))
+        .alert(item: $state.postsAddError) {error in
+            Alert(
+                title: Text("Nepodarilo sa pridať príspevok"),
+                message: Text(addErrorMessage(error: error)),
+                dismissButton: .default(Text("OK"))
+            )
         }
         .onAppear{loadCategories()}
     }
     
     func loadCategories() {
-        vm.loadCategories()
+        interactors.categories.load()
     }
     
-    func addPost(course: Course, title: String, category: Category, content: String) {
-        vm.addPost(course: course, title: title, category: category, content: content, callback: {
-            presentationMode.wrappedValue.dismiss()
-        })
+    func addPost() {
+        guard let course = state.coursesSelected,
+              let categoryId = categoryId,
+              let category = state.categories[categoryId] else {return}
+        
+        interactors.posts.add(course: course, title: title, category: category, content: content) {
+            self.isActive = false
+        }
     }
     
-    func addErrorMessage() -> String {
-        switch vm.error {
+    func addErrorMessage(error: PostsApiError) -> String {
+        switch error {
             case .validationError: return "Prosím, vyplňte všetky polia"
             default: return "Skontrolujte vyplnené údaje a pripojenie na internet"
         }
@@ -68,42 +80,7 @@ struct AddPostView: View {
 struct AddPostView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AddPostView(course: Course.example)
+            AddPostView(isActive: .constant(true))
         }
-    }
-}
-
-class AddPostVM: ObservableObject {
-    //private let postsApi: PostsApi = MemoryPostsApi()
-    private let postsApi: PostsApi = WebPostsApi()
-    //private let categoriesApi: CategoriesApi = MemoryCategoriesApi()
-    private let categoriesApi: CategoriesApi = WebCategoriesApi()
-    private var cancelBag = Set<AnyCancellable>()
-    
-    @Published var categories = [Category]()
-    @Published var error: PostsApiError? = nil
-    @Published var showError = false
-    
-    public func loadCategories() {
-        categoriesApi.load()
-            .sink(receiveCompletion: {_ in}, receiveValue: {res in
-                self.categories = res.categories.values.sorted {$0.title < $1.title}
-            })
-            .store(in: &cancelBag)
-    }
-    
-    public func addPost(course: Course, title: String, category: Category, content: String, callback: @escaping () -> Void) {
-        error = nil
-        
-        postsApi.add(course: course, title: title, category: category, content: content)
-            .sink(receiveCompletion: {status in
-                switch status {
-                    case .failure(let error):
-                        self.error = error
-                        self.showError = true
-                    default: break
-                }
-            }, receiveValue: {_ in callback()})
-            .store(in: &cancelBag)
     }
 }

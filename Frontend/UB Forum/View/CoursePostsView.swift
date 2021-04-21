@@ -2,8 +2,12 @@ import SwiftUI
 import Combine
 
 struct CoursePostsView: View {
-    let course: Course
-    @ObservedObject private var vm = PostsVM()
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var interactors: Interactors
+    
+    @Binding var isActive: Bool
+    @State private var showAdd: Bool = false
+    @State private var showDetail: Bool = false
     
     let columns = [
         GridItem(.flexible())
@@ -11,22 +15,30 @@ struct CoursePostsView: View {
     
     var body: some View {
         ScrollView {
+            NavigationLink(destination: AddPostView(isActive: $showAdd), isActive: $showAdd) {EmptyView()}
+            NavigationLink(destination: PostDetailView(isActive: $showDetail), isActive: $showDetail) {EmptyView()}
+            
             LazyVGrid(columns: columns, content: {
-                ForEach(vm.posts) { post in
-                    NavigationLink(
-                        destination: PostDetailView(post: post, category: vm.categories[post.categoryId]!, user: vm.users[post.userId]!),
-                        label: {
-                            PostGridItemView(post: post, category: vm.categories[post.categoryId]!, user: vm.users[post.userId]!)
-                        }).buttonStyle(PlainButtonStyle())
+                ForEach(state.postsByDate) {post in
+                    PostGridItemView(
+                        post: post,
+                        category: state.categories[post.categoryId]!,
+                        user: state.users[post.userId]!
+                    )
+                    .onTapGesture {
+                        self.state.postsSeleted = post
+                        self.showDetail = true
+                    }
                 }
-            }).padding()
+            })
+            .padding()
             .animation(.default)
         }
-        .navigationTitle(course.title)
+        .navigationTitle(state.coursesSelected?.title ?? "Predmet")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                NavigationLink(destination: AddPostView(course: course)) {
+                Button(action: {self.showAdd = true}) {
                     Image(systemName: "plus")
                 }
             }
@@ -35,33 +47,15 @@ struct CoursePostsView: View {
     }
     
     func loadPosts() {
-        vm.load(course: course)
+        guard let course = state.coursesSelected else {return}
+        interactors.posts.load(course: course)
     }
 }
 
 struct CoursePosts_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CoursePostsView(course: .example)
+            CoursePostsView(isActive: .constant(true))
         }
-    }
-}
-
-class PostsVM: ObservableObject {
-    //private let api: PostsApi = MemoryPostsApi()
-    private let api: PostsApi = WebPostsApi()
-    private var cancelBag = Set<AnyCancellable>()
-    
-    @Published var posts = [Post]()
-    @Published var users = [Int:User]()
-    @Published var categories = [Int:Category]()
-    
-    public func load(course: Course) {
-        api.load(course: course)
-            .sink {_ in} receiveValue: { res in
-                self.users = res.users
-                self.categories = res.categories
-                self.posts = res.posts.values.sorted {$0.createdAt > $1.createdAt}
-            }.store(in: &cancelBag)
     }
 }

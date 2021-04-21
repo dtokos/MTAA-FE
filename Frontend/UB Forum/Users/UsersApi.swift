@@ -13,3 +13,7 @@ enum UsersApiError: Error {
     case validationError
     case other
 }
+
+extension UsersApiError: Identifiable {
+    var id: Int { hashValue }
+}

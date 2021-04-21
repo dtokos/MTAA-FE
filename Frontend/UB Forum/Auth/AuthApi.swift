@@ -1,3 +1,4 @@
+import Foundation
 import Combine
 
 protocol AuthApi {
@@ -14,4 +15,8 @@ enum AuthApiError: Error {
     case validationError
     case wrongCredentials
     case other
+}
+
+extension AuthApiError: Identifiable {
+    var id: Int { hashValue }
 }
