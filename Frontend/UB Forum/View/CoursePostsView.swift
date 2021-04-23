@@ -18,7 +18,7 @@ struct CoursePostsView: View {
             NavigationLink(destination: AddPostView(isActive: $showAdd), isActive: $showAdd) {EmptyView()}
             NavigationLink(destination: PostDetailView(isActive: $showDetail), isActive: $showDetail) {EmptyView()}
             
-            LazyVGrid(columns: columns, content: {
+            LazyVGrid(columns: columns, spacing: 24) {
                 ForEach(state.postsByDate) {post in
                     PostGridItemView(
                         post: post,
@@ -30,7 +30,7 @@ struct CoursePostsView: View {
                         self.showDetail = true
                     }
                 }
-            })
+            }
             .padding()
             .animation(.default)
         }

@@ -41,10 +41,11 @@ struct PostDetailView: View {
                     user: state.users[state.postsSeleted!.userId]!
                 )
                 
-                Spacer(minLength: 20)
                 Text("Komentáre")
-                    .font(.headline)
-                    .padding(.bottom, 10)
+                    .font(.title3)
+                    .foregroundColor(Color(white: 0.164))
+                    .padding(.top, 32)
+                    .padding(.bottom, 8)
                 
                 LazyVGrid(columns: columns) {
                     ForEach(state.commentsByDate) {comment in
@@ -65,10 +66,12 @@ struct PostDetailView: View {
                                         Image(systemName: "trash")
                                     }
                                 }
-                                .offset(x: -5, y: 5)
+                                .offset(x: -16, y: 22)
                             }
                         }
                     }
+                    
+                    Spacer(minLength: 24)
                     
                     Button(action: {self.showAddComment = true}) {
                         Text("Pridať komentár")
@@ -79,7 +82,6 @@ struct PostDetailView: View {
                             .cornerRadius(8)
                     }
                 }
-                .padding()
                 .animation(.default)
             }
             .padding()

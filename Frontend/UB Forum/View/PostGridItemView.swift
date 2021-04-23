@@ -6,50 +6,59 @@ struct PostGridItemView: View {
     let user: User
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                VStack {
-                    Image(uiImage: user.profileImage)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .center) {
+                Image(uiImage: user.profileImage)
+                    .resizable()
+                    .frame(width: 36, height: 36)
+                    .clipShape(Circle())
+                VStack(alignment: .leading, spacing: 4) {
                     Text(user.name)
+                        .font(.footnote)
+                        .foregroundColor(Color(white: 0.164))
+                    Text(post.createdAgo)
                         .font(.caption)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(nil)
-                        .foregroundColor(.gray)
-                        .frame(maxWidth: 75)
+                        .foregroundColor(Color(white: 0.46))
                 }
-                VStack(alignment: .leading) {
-                    Text(post.title)
-                        .font(.title)
-                    HStack(spacing: 5) {
-                        Text(category.title)
-                            .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
-                            .font(.caption)
-                            .foregroundColor(.white)
-                            .background(Color(category.color))
-                            .cornerRadius(8)
-                        Text(post.createdAgo)
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                }
+                
+                Spacer()
+                
+                Text(category.title)
+                    .font(.caption)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
+                    .background(Color(category.color))
+                    .clipShape(Capsule())
             }
-            .padding(.bottom, 10)
+            .padding(.horizontal, 16)
             
-            Text(post.content)
-                .font(.body)
+            Rectangle()
+                .fill(Color(white: 0.93))
+                .frame(height: 2)
+                .padding(.vertical, 16)
+            
+            VStack(alignment: .leading) {
+                Text(post.title)
+                    .font(.title2)
+                    .foregroundColor(Color(white: 0.164))
+                    .padding(.bottom, 4)
+                    
+                Text(post.content)
+                    .font(.callout)
+                    .foregroundColor(Color(white: 0.46))
+                    .padding(.bottom, 4)
+            }
+            .padding(.horizontal, 16)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, alignment: .topLeading)
-        .padding()
-        .background(Color(.white))
+        .padding(.vertical, 16)
+        .background(Color.white)
+        .cornerRadius(16)
         .overlay(
-            Rectangle().frame(height: 1).foregroundColor(.gray),
-            alignment: .bottom
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color(white: 0.93), lineWidth: 2)
         )
-        .clipped()
-        .shadow(color: Color.black.opacity(0.15), radius: 5)
+        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
     }
 }
 
