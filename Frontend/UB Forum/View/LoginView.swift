@@ -5,8 +5,8 @@ struct LoginView: View {
     @EnvironmentObject private var state: AppState
     @EnvironmentObject private var interactors: Interactors
     
-    @State private var email = "eugen.artvy@example.com" // TODO: Remove after testing
-    @State private var password = "12345678" // TODO: Remove after testing
+    @State private var email = ""
+    @State private var password = ""
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
