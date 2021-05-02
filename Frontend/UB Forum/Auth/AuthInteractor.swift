@@ -9,6 +9,7 @@ class AuthInteractor {
     init(api: AuthApi, state: AppState) {
         self.api = api
         self.state = state
+        self.api.setToken(token: state.authToken)
     }
 
     public func logIn(email: String, password: String) {

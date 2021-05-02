@@ -56,6 +56,8 @@
 		98CDB6EA262F0C2000834C76 /* CommentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6E9262F0C2000834C76 /* CommentsApi.swift */; };
 		98CDB6EF262F0CE900834C76 /* MemoryCommentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6EE262F0CE900834C76 /* MemoryCommentsApi.swift */; };
 		98CDB6F2262F154F00834C76 /* WebCommentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CDB6F1262F154F00834C76 /* WebCommentsApi.swift */; };
+		98E7D829263F21B9009BA5C0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E7D828263F21B9009BA5C0 /* Persistence.swift */; };
+		98E7D82C263F21F7009BA5C0 /* JSONPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E7D82B263F21F7009BA5C0 /* JSONPersistence.swift */; };
 		98FA61D4262D9143009CDE99 /* CategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D3262D9143009CDE99 /* CategoriesApi.swift */; };
 		98FA61D7262D916E009CDE99 /* MemoryCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */; };
 		98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */; };
@@ -113,6 +115,8 @@
 		98CDB6E9262F0C2000834C76 /* CommentsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsApi.swift; sourceTree = "<group>"; };
 		98CDB6EE262F0CE900834C76 /* MemoryCommentsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCommentsApi.swift; sourceTree = "<group>"; };
 		98CDB6F1262F154F00834C76 /* WebCommentsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCommentsApi.swift; sourceTree = "<group>"; };
+		98E7D828263F21B9009BA5C0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		98E7D82B263F21F7009BA5C0 /* JSONPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONPersistence.swift; sourceTree = "<group>"; };
 		98FA61D3262D9143009CDE99 /* CategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesApi.swift; sourceTree = "<group>"; };
 		98FA61D6262D916E009CDE99 /* MemoryCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCategoriesApi.swift; sourceTree = "<group>"; };
 		98FA61D9262DB766009CDE99 /* WebCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCategoriesApi.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				98CDB6E8262F0C1100834C76 /* Comments */,
 				98378758261EDC200004FF41 /* Models */,
 				98378756261EDB790004FF41 /* View */,
+				98E7D827263F21A0009BA5C0 /* Persistence */,
 				989D74A2262C5008002DDEF7 /* System */,
 				9806723F261C7A8B00EA07C4 /* UB_ForumApp.swift */,
 				98067243261C7A8D00EA07C4 /* Assets.xcassets */,
@@ -282,6 +287,15 @@
 			path = Comments;
 			sourceTree = "<group>";
 		};
+		98E7D827263F21A0009BA5C0 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				98E7D828263F21B9009BA5C0 /* Persistence.swift */,
+				98E7D82B263F21F7009BA5C0 /* JSONPersistence.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		98FA61D2262D9131009CDE99 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +380,7 @@
 				98FA61DA262DB766009CDE99 /* WebCategoriesApi.swift in Sources */,
 				98CDB6F2262F154F00834C76 /* WebCommentsApi.swift in Sources */,
 				98C4B4902630BEB800F2FE5A /* CommentsInteractor.swift in Sources */,
+				98E7D82C263F21F7009BA5C0 /* JSONPersistence.swift in Sources */,
 				988E3889261CE03D0015D61B /* LoginView.swift in Sources */,
 				7B623141262EDC8A00E42544 /* EditCommentView.swift in Sources */,
 				985878202620E55800178E4E /* AddPostView.swift in Sources */,
@@ -382,6 +397,7 @@
 				988AA09F261EEA66003600F2 /* Post.swift in Sources */,
 				98CDB6EF262F0CE900834C76 /* MemoryCommentsApi.swift in Sources */,
 				9837875A261EDC340004FF41 /* Course.swift in Sources */,
+				98E7D829263F21B9009BA5C0 /* Persistence.swift in Sources */,
 				988AA0A2261EEAC6003600F2 /* Category.swift in Sources */,
 				9838F848262B054600D25383 /* AuthApi.swift in Sources */,
 				985878262620F67D00178E4E /* EditPostView.swift in Sources */,

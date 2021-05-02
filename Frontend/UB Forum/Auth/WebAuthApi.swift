@@ -26,8 +26,8 @@ struct WebAuthApi: AuthApi {
                 if let apiError = error as? AuthApiError {return apiError}
                 else {return AuthApiError.other}
             }
-            .handleEvents(receiveOutput: { res in
-                WebRequestShared.headers["Token"] = "Bearer \(res.token)"
+            .handleEvents(receiveOutput: {res in
+                setToken(token: res.token)
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
@@ -47,10 +47,18 @@ struct WebAuthApi: AuthApi {
                 else {return AuthApiError.other}
             }
             .handleEvents(receiveOutput: { _ in
-                WebRequestShared.headers.removeValue(forKey: "Token")
+                setToken(token: nil)
             })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+    }
+    
+    func setToken(token: String?) {
+        if let token = token {
+            WebRequestShared.headers["Token"] = "Bearer \(token)"
+        } else {
+            WebRequestShared.headers.removeValue(forKey: "Token")
+        }
     }
 }
 

@@ -13,7 +13,7 @@ struct Course: Identifiable {
     #endif
 }
 
-extension Course: Decodable {
+extension Course: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
@@ -29,5 +29,14 @@ extension Course: Decodable {
         color = try UIColor.system(string: values.decode(String.self, forKey: .color))
         createdAt = try values.decode(Date.self, forKey: .createdAt)
         updatedAt = try values.decode(Date.self, forKey: .updatedAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(color.systemToString(), forKey: .color)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
     }
 }

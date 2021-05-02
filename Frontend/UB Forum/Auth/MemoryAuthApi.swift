@@ -27,4 +27,7 @@ struct MemoryAuthApi: AuthApi {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    
+    func setToken(token: String?) {
+    }
 }

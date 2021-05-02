@@ -24,7 +24,7 @@ struct Comment: Identifiable {
     #endif
 }
 
-extension Comment: Decodable {
+extension Comment: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case userId = "user_id"
@@ -42,6 +42,16 @@ extension Comment: Decodable {
         content = try values.decode(String.self, forKey: .content)
         createdAt = try values.decode(Date.self, forKey: .createdAt)
         updatedAt = try values.decode(Date.self, forKey: .updatedAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(userId, forKey: .userId)
+        try container.encode(postId, forKey: .postId)
+        try container.encode(content, forKey: .content)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
     }
 }
 

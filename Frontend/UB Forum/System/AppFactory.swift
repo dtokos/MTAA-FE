@@ -22,4 +22,20 @@ struct AppFactory {
             comments: comments
         )
     }
+    
+    func makePersistence() -> Persistence {
+        return JSONPersistence(encoder: makeJSONEncoder(), decoder: makeJSONDecoder())
+    }
+    
+    private func makeJSONEncoder() -> JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }
+    
+    private func makeJSONDecoder() ->JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }
 }

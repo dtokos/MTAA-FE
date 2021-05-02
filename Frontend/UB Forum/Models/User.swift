@@ -14,7 +14,7 @@ struct User: Equatable {
     #endif
 }
 
-extension User: Decodable {
+extension User: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
@@ -33,5 +33,18 @@ extension User: Decodable {
         profileImage = UIImage(data: imageData) ?? UIImage(named: "userPlaceholder")!
         createdAt = try values.decode(Date.self, forKey: .createdAt)
         updatedAt = try values.decode(Date.self, forKey: .updatedAt)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(email, forKey: .email)
+        guard let imageData = profileImage.jpegData(compressionQuality: 1.0)?.base64EncodedString() else {
+            throw EncodingError.invalidValue(Any.self, EncodingError.Context(codingPath: [CodingKeys.profileImage], debugDescription: "Could not encode profileImage to data"))
+        }
+        try container.encode("data:image/jpeg;base64,\(imageData)", forKey: .profileImage)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
     }
 }

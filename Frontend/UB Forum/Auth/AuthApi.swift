@@ -4,6 +4,7 @@ import Combine
 protocol AuthApi {
     func logIn(email: String, password: String) -> AnyPublisher<AuthApiResponse, AuthApiError>
     func logOut() -> AnyPublisher<Void, AuthApiError>
+    func setToken(token: String?)
 }
 
 struct AuthApiResponse: Decodable {
