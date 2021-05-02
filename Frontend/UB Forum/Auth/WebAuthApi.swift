@@ -5,9 +5,8 @@ struct WebAuthApi: AuthApi {
     private let baseUrl = URL(string: "http://mtaa.test:8888/api/auth")!
     private let decoder: JSONDecoder
     
-    init() {
-        decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+    init(decoder: JSONDecoder) {
+        self.decoder = decoder
     }
     
     func logIn(email: String, password: String) -> AnyPublisher<AuthApiResponse, AuthApiError> {

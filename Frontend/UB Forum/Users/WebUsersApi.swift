@@ -6,9 +6,8 @@ struct WebUsersApi: UsersApi {
     private let baseUrl = URL(string: "http://mtaa.test:8888/api/users")!
     private let decoder: JSONDecoder
     
-    init() {
-        decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+    init(decoder: JSONDecoder) {
+        self.decoder = decoder
     }
     
     func edit(user: User, password: String?, profileImage: UIImage?) -> AnyPublisher<UsersApiResponse, UsersApiError> {

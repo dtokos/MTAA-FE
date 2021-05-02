@@ -5,9 +5,8 @@ struct WebCommentsApi: CommentsApi {
     private let baseUrl = URL(string: "http://mtaa.test:8888/api/courses")!
     private let decoder: JSONDecoder
     
-    init() {
-        decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+    init(decoder: JSONDecoder) {
+        self.decoder = decoder
     }
     
     func load(post: Post) -> AnyPublisher<CommentsApiResponse, CommentsApiError> {

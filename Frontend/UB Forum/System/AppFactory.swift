@@ -6,12 +6,14 @@ struct AppFactory {
     }
     
     func makeInteractors(state: AppState) -> Interactors {
-        let auth = AuthInteractor(api: WebAuthApi(), state: state)
-        let users = UsersInteractor(api: WebUsersApi(), state: state)
-        let courses = CoursesInteractor(api: WebCoursesApi(), state: state)
-        let categories = CategoriesInteractor(api: WebCategoriesApi(), state: state)
-        let posts = PostsInteractor(api: WebPostsApi(), state: state)
-        let comments = CommentsInteractor(api: WebCommentsApi(), state: state)
+        let decoder = makeJSONDecoder()
+        
+        let auth = AuthInteractor(api: WebAuthApi(decoder: decoder), state: state)
+        let users = UsersInteractor(api: WebUsersApi(decoder: decoder), state: state)
+        let courses = CoursesInteractor(api: WebCoursesApi(decoder: decoder), state: state)
+        let categories = CategoriesInteractor(api: WebCategoriesApi(decoder: decoder), state: state)
+        let posts = PostsInteractor(api: WebPostsApi(decoder: decoder), state: state)
+        let comments = CommentsInteractor(api: WebCommentsApi(decoder: decoder), state: state)
         
         return Interactors(
             auth: auth,

@@ -279,10 +279,10 @@
 		98CDB6E8262F0C1100834C76 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				98C4B48F2630BEB800F2FE5A /* CommentsInteractor.swift */,
 				98CDB6E9262F0C2000834C76 /* CommentsApi.swift */,
 				98CDB6EE262F0CE900834C76 /* MemoryCommentsApi.swift */,
 				98CDB6F1262F154F00834C76 /* WebCommentsApi.swift */,
-				98C4B48F2630BEB800F2FE5A /* CommentsInteractor.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
