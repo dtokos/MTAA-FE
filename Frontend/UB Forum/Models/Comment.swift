@@ -15,6 +15,7 @@ struct Comment: Identifiable {
     static let dateFormatter: RelativeDateTimeFormatter = {
         let formatter = RelativeDateTimeFormatter()
         formatter.locale = Locale.init(identifier: "sk")
+        formatter.dateTimeStyle = .named
         formatter.unitsStyle = .full
         return formatter
     }()
